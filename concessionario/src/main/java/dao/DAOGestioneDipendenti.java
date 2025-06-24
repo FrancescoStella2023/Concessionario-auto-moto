@@ -7,16 +7,40 @@ import dbdao.DAOConnDB;
 
 
 public class DAOGestioneDipendenti implements DAODipendenti{
-	public void aggiungiDipedente(EntitaDipendente dipendente) throws SQLException {
+	
+	private Connection conn = new DAOConnDB().getConn();
+	
+	public void aggiungiDipendente(EntitaDipendente dipendente) throws SQLException {
 		String sql = "INSERT INTO Dipendenti (nome, cognome, password, is_admin) VALUES (?, ?, ?, ?)";
 		
-		DAOConnDB daoConn = new DAOConnDB();
-		PreparedStatement ps = daoConn.getConn().prepareStatement(sql);
+		PreparedStatement ps = conn.prepareStatement(sql);
+		
 		ps.setString(1, dipendente.getNome()); //riempie i '?'
 		ps.setString(2,  dipendente.getCognome());
 		ps.setString(3, dipendente.getPassword()); 
-		ps.setString(4,  dipendente.getIsAdmin());
+		ps.setBoolean(4,  dipendente.getIsAdmin());
+		
+		ps.execute();
 	}
-	public void cambiaPassword(int idDipendente, String newPass);
-	public ResultSet visualizzaDipendenti();
+	public boolean cambiaPassword(int idDipendente, String newPass) throws SQLException {
+		String sql = "UPDATE dipendenti SET password = ? WHERE id_dipendente = ?";
+		
+		PreparedStatement ps = conn.prepareStatement(sql);
+		
+		ps.setString(1, newPass); //riempie i '?'
+		ps.setInt(2,  idDipendente);
+		
+		int righeModificate = ps.executeUpdate();
+		
+		if(righeModificate == 0) return false;
+		else return true;
+	}
+	public ResultSet visualizzaDipendenti() throws SQLException {
+		String sql = "SELECT * FROM dipendenti";
+		PreparedStatement ps = conn.prepareStatement(sql);
+		
+		ResultSet rs = ps.executeQuery();
+		return rs;
+		
+	}
 }

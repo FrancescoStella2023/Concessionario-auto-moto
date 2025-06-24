@@ -15,14 +15,15 @@ public class LoginUtente extends JPanel {
 	
 	public LoginUtente () {
 		
+		
 		FormLayout layout = new FormLayout(
-			"right:pref, 4dlu, 100dlu",
+			"center:pref, 4dlu, 100dlu",
 			"pref, 4dlu, pref, 4dlu, pref"
 		);
 		setLayout(layout);
 		
 		usernameField = new JTextField();
-		passwordField = new JTextField();
+		passwordField = new JPasswordField();
 		loginButton = new JButton("Login");
 		
 		CellConstraints cc = new CellConstraints();
@@ -39,13 +40,22 @@ public class LoginUtente extends JPanel {
 	}
 	
 	
+	public void showWindow() {
+		JFrame frame = new JFrame("Login");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setContentPane(this);
+		frame.setSize(400, 300);
+		frame.setLocationRelativeTo(null);
+		frame.setVisible(true);
+	}
+	
 	public String getUsername() {
 		return usernameField.getText();
 	}
 	
 	
 	public String getPassword() {
-		return usernameField.getText();
+		return passwordField.getText();
 	}
 	
 	

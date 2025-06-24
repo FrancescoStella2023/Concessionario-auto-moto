@@ -4,7 +4,7 @@ import java.sql.*;
 import model.*;
 
 public interface DAODipendenti {
-	public void aggiungiDipedente(EntitaDipendente dipendente) throws SQLException;
-	public void cambiaPassword(int idDipendente, String newPass) throws SQLException;
-	public ResultSet visualizzaDipendenti();
+	public void aggiungiDipendente(EntitaDipendente dipendente) throws SQLException;
+	public boolean cambiaPassword(int idDipendente, String newPass) throws SQLException;
+	public ResultSet visualizzaDipendenti() throws SQLException;
 }
