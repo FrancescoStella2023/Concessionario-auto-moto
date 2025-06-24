@@ -12,5 +12,21 @@ public class EntitaVendite {
 		this.numeroTelaio = numeroTelaio;
 		this.idDipendente = 0; ///PRENDERE DA InfoDipendenteLogic IN SEGUITO///
 	}
+
+	public int getNumeroTelaio() {
+		return numeroTelaio;
+	}
+
+	public int getIdCliente() {
+		return idCliente;
+	}
+
+	public int getIdDipendente() {
+		return idDipendente;
+	}
+
+	public String getDataVendita() {
+		return dataVendita;
+	}
 	
 }
