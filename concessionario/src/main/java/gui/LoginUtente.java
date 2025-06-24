@@ -9,7 +9,7 @@ import java.awt.event.ActionEvent;
 public class LoginUtente extends JPanel {
 	
 	private JTextField usernameField;
-	private JPasswordField passwordField;
+	private JTextField passwordField;
 	private JButton loginButton;
 	
 	
@@ -27,26 +27,34 @@ public class LoginUtente extends JPanel {
 		
 		CellConstraints cc = new CellConstraints();
 		
-		add(new Jlabel("Username:"), cc.xy(1,1));
+		add(new JLabel("Username:"), cc.xy(1,1));
 		add(usernameField, cc.xy(3,1));
 		
-		add(new Jlabel("Password:"), cc.xy(1,3));
+		add(new JLabel("Password:"), cc.xy(1,3));
 		add(passwordField, cc.xy(3,3));
 		
 		add(loginButton, cc.xy(3, 5));
 		
-		loginButton.addActionListener();
+		loginButton.addActionListener(Test()); //Placeholder
 	}
 	
 	public String getUsername() {
 		return usernameField.getText();
 	}
 	
-	private ActionListener Test() {
-		public void actionPerformed(ActionEvent e) {
-			System.out.println("Username - " + )
-		}
-		
+	public String getPassword() {
+		return passwordField.getText();
+	}
+	
+	private ActionListener Test() { //Controllare se i text field e button funzionano
+		return new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Pressed");
+				System.out.println("Username - " + getUsername());
+				System.out.println("Password - " + getPassword());
+			}
+		};
 	}
 	
 }
