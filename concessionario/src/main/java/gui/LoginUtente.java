@@ -35,26 +35,28 @@ public class LoginUtente extends JPanel {
 		
 		add(loginButton, cc.xy(3, 5));
 		
-		loginButton.addActionListener(Test()); //Placeholder
+		loginButton.addActionListener(Test());
 	}
+	
 	
 	public String getUsername() {
 		return usernameField.getText();
 	}
 	
+	
 	public String getPassword() {
-		return passwordField.getText();
+		return usernameField.getText();
 	}
 	
-	private ActionListener Test() { //Controllare se i text field e button funzionano
-		return new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				System.out.println("Pressed");
-				System.out.println("Username - " + getUsername());
-				System.out.println("Password - " + getPassword());
-			}
-		};
-	}
 	
+	private ActionListener Test() {
+		 return new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Pressed");
+                System.out.println("Username - " + getUsername());
+                System.out.println("Password - " + getPassword());
+            }
+        };
+	}
 }
