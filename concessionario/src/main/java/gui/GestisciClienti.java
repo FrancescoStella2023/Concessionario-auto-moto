@@ -6,10 +6,15 @@ import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.FlowLayout;
+import Principale.*;
 
 public class GestisciClienti extends JPanel {
 	
-	
+	/*
+	 * 	TODO:
+	 * 		impostare a zero il valore del club se è vuoto
+	 * 
+	 * */
     private JTextField nomeField;
     private JTextField cognomeField;
     private JTextField emailField;
@@ -20,11 +25,15 @@ public class GestisciClienti extends JPanel {
     private JTextField idClubField;
 	private JButton enterButton;
 	
-	public GestisciClienti() {
+	private MainProcess mainProcess;
+	
+	public GestisciClienti(MainProcess main) {
+       	
+       	this.mainProcess = main;
 		
 		FormLayout layout = new FormLayout(
             "right:pref, 4dlu, 150dlu",
-            "pref, 4dlu, pref, 4dlu, pref, 4dlu, pref, 4dlu, pref, 4dlu, pref, 4dlu, pref, 4dlu, pref"
+            "pref, 4dlu, pref, 4dlu, pref, 4dlu, pref, 4dlu, pref, 4dlu, pref, 4dlu, pref, 4dlu, pref, 4dlu, pref"
         );
         setLayout(layout);
         CellConstraints cc = new CellConstraints();
@@ -38,7 +47,7 @@ public class GestisciClienti extends JPanel {
         indirizzoField = new JTextField();
         idClubField = new JTextField();
         
-        enterButton = new JButton();
+        enterButton = new JButton("Enter");
 
         add(new JLabel("Nome:"), cc.xy(1, 1));
         add(nomeField, cc.xy(3, 1));
@@ -64,21 +73,9 @@ public class GestisciClienti extends JPanel {
         add(new JLabel("ID Club:"), cc.xy(1, 15));
         add(idClubField, cc.xy(3, 15));
 		
+        add(enterButton, cc.xy(3, 17));
 		
 		enterButton.addActionListener(Test());
-	}
-	
-	public void showWindow() {
-		JFrame frame = new JFrame("Gestisci magazzini");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		JPanel wrapper = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 50));
-	    wrapper.add(this);
-	    
-		frame.setContentPane(wrapper);
-		frame.setSize(450, 350);
-		frame.setLocationRelativeTo(null);
-		frame.setVisible(true);
 	}
 	
 	public String getNome() {

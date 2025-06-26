@@ -25,14 +25,15 @@ public class DAOGestioneVeicoli implements DAOVeicoli{
 		ps.setFloat(6, veicolo.getPrezzo());
 		ps.setString(7, veicolo.getTipo());
 		
-		if(veicolo.getTipo().equals("m")) {
-			ps.setNull(8, java.sql.Types.INTEGER); //mette a null per il tipo int
-			ps.setNull(10, java.sql.Types.INTEGER);
-			ps.setFloat(11, veicolo.getAltezzaSeggiolino());
+		if(veicolo.getTipo().equals("m")) { //se è una moto
+			ps.setNull(8, java.sql.Types.INTEGER); //mette a null numero_porte
+			ps.setNull(10, java.sql.Types.INTEGER); //mette a null numero_airbag
+			ps.setFloat(11, veicolo.getAltezzaSeggiolino()); 
 		}
 		else {
 			ps.setInt(8, veicolo.getNumeroPorte());
-			ps.setNull(11, java.sql.Types.FLOAT);
+			ps.setInt(10, veicolo.getNumeroAirbag());
+			ps.setNull(11, java.sql.Types.FLOAT); //mette a null altezza_seggiolino
 		}
 		
 		ps.setString(9, veicolo.getTipologiaCambio());
@@ -50,7 +51,7 @@ public class DAOGestioneVeicoli implements DAOVeicoli{
 		
 		int elementiRimossi = ps.executeUpdate();
 		
-		if(elementiRimossi == 0) return false;
+		if(elementiRimossi == 0) return false; //se non è stato eliminato niente
 		else return true;
 		
 	}

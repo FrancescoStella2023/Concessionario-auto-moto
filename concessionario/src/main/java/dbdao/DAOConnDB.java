@@ -4,12 +4,9 @@ import java.sql.*;
 
 public class DAOConnDB implements DAOConnection{
 	public static Connection conn;
-	public boolean verificaAccesso(String idDipendente, String password)  throws SQLException {
+	public boolean verificaAccesso(int idDipendente, String password)  throws SQLException {
 		String sql = "SELECT * FROM dipendenti WHERE id_dipendente = ? AND password = ?"; //prepara l'sql per evitare injection
 		PreparedStatement ps = conn.prepareStatement(sql);
-		
-		
-		int idDipendenteInt = idDipendente.
 		ps.setInt(1, idDipendente); //riempie i '?'
 		ps.setString(2,  password);
 		

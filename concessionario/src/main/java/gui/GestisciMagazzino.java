@@ -38,19 +38,6 @@ public class GestisciMagazzino extends JPanel {
 	}
 	
 	
-	public void showWindow() {
-		JFrame frame = new JFrame("Gestisci magazzini");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		JPanel wrapper = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 50));
-	    wrapper.add(this);
-	    
-		frame.setContentPane(wrapper);
-		frame.setSize(450, 350);
-		frame.setLocationRelativeTo(null);
-		frame.setVisible(true);
-	}
-	
 	public String getIndirizzo() {
 		return indirizzoField.getText();
 	}

@@ -17,8 +17,8 @@ public class DAOGestioneClienti implements DAOClienti{
 		
 		PreparedStatement ps = conn.prepareStatement(sql);
 		
-		if(cliente.getIdClub() == 0) {
-			ps.setNull(1, java.sql.Types.INTEGER);
+		if(cliente.getIdClub() == 0) { //se l'id del club è zero, significa che non è in nessun club
+			ps.setNull(1, java.sql.Types.INTEGER); //mette a null il valore per il club
 		}
 		else {
 			ps.setInt(1,cliente.getIdClub());

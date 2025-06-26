@@ -22,21 +22,34 @@ public class MostraFunzioni extends JPanel {
 		
 	public MostraFunzioni (MainProcess main) {
 		
+		this.mainProcess = main;//Accesso al mainProcess per chiamare showPanel
+		
+		//Set up grafica interfaccia
 		FormLayout layout = new FormLayout(
-			"center:pref",
+			"40dlu, left:pref",
 			"pref, 4dlu, pref, 4dlu, pref, 4dlu, pref, 4dlu, pref, 4dlu, pref, 4dlu, pref"
 		);
 			
 		setLayout(layout);
 		CellConstraints cc = new CellConstraints();
 		
-		add(gestisciClientiButton, cc.xy(1, 1));
-		add(gestisciClubButton, cc.xy(1, 3));
-		add(gestisciDipendentiButton, cc.xy(1, 5));
-		add(gestisciMagazzinoButton, cc.xy(1, 7));
-		add(gestisciVeicoliButton, cc.xy(1, 9));
-		add(gestisciVenditeButton, cc.xy(1, 11));
-		add(visualizzaDatiButton, cc.xy(1, 13));
+		//Da implementare un if check per is admin che rende visibili solo i bottoni a cui l'utente ha accesso
+		
+		gestisciClientiButton = new JButton("Gestisci Clienti");
+	    gestisciClubButton = new JButton("Gestisci Club");
+	    gestisciDipendentiButton = new JButton("Gestisci Dipendenti");
+	    gestisciMagazzinoButton = new JButton("Gestisci Magazzino");
+	    gestisciVeicoliButton = new JButton("Gestisci Veicoli");
+	    gestisciVenditeButton = new JButton("Gestisci Vendite");
+	    visualizzaDatiButton = new JButton("Visualizza Dati");
+		
+		add(gestisciClientiButton, cc.xy(2, 1));
+		add(gestisciClubButton, cc.xy(2, 3));
+		add(gestisciDipendentiButton, cc.xy(2, 5));
+		add(gestisciMagazzinoButton, cc.xy(2, 7));
+		add(gestisciVeicoliButton, cc.xy(2, 9));
+		add(gestisciVenditeButton, cc.xy(2, 11));
+		add(visualizzaDatiButton, cc.xy(2, 13));
 		
 		gestisciClientiButton.addActionListener(Test(0));
 		gestisciClubButton.addActionListener(Test(1));
@@ -48,31 +61,34 @@ public class MostraFunzioni extends JPanel {
 	}
 	
 		
-	public void showWindow() {
-		JFrame frame = new JFrame("Funzioni");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		JPanel wrapper = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 50));
-	    wrapper.add(this);
-	    
-		frame.setContentPane(wrapper);
-		frame.setSize(450, 350);
-		frame.setLocationRelativeTo(null);
-		frame.setVisible(true);
-	}
-	
-	
-	private ActionListener Test(int numScheda) {
+	private ActionListener Test(int numScheda) {//Usa uno switch per aprire le schede corrette
 		 return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Pressed");
-				System.out.println(numScheda);
-				
-				/*Si potrebbe usare un semplice switch per aprire la sheda corretta 
-				e fare un check con privilegio admin per vedere se si hanno 
-				gli accessi per aprire la scheda e dare erroe in caso contrario
-				*/
+				switch (numScheda) {
+					case 0:
+						System.out.println("Gestisci Clienti");
+						mainProcess.showPanel("Gestisci clienti");
+						break;
+					case 1:
+						System.out.println("Gestisci Club");
+						break;
+					case 2:
+						System.out.println("Gestisci Dipendenti");
+						break;
+					case 3:
+						System.out.println("Gestisci Magazzino");
+						break;
+					case 4:
+						System.out.println("Gestisci Veicoli");
+						break;
+					case 5:
+						System.out.println("Gestisci Vendite");
+						break;
+					case 6:
+						System.out.println("Visualizza Dati");
+						break;
+				}
             }
         };
 	}
