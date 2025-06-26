@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.FlowLayout;
+import Principale.*;
 
 public class LoginUtente extends JPanel {
 	
@@ -13,8 +14,11 @@ public class LoginUtente extends JPanel {
 	private JPasswordField passwordField;
 	private JButton loginButton;
 	
+	private MainProcess mainProcess;
 	
-	public LoginUtente () {
+	public LoginUtente (MainProcess main) {
+		
+		this.mainProcess = main;
 		
 		
 		FormLayout layout = new FormLayout(
@@ -49,7 +53,7 @@ public class LoginUtente extends JPanel {
 	    wrapper.add(this);
 	    
 		frame.setContentPane(wrapper);
-		frame.setSize(350, 250);
+		frame.setSize(450, 350);
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 	}
@@ -71,6 +75,7 @@ public class LoginUtente extends JPanel {
                 System.out.println("Pressed");
                 System.out.println("Username - " + getUsername());
                 System.out.println("Password - " + getPassword());
+                mainProcess.showPanel("Elenco Funzioni");
             }
         };
 	}

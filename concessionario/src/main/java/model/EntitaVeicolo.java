@@ -7,26 +7,26 @@ public class EntitaVeicolo {
 	private String colore;
 	private float prezzo;
 	private boolean stato;
-	private char tipo;
+	private String tipo;
 	private int numeroPorte;
-	private char tipologiaCambio;
+	private String tipologiaCambio;
 	private int numeroAirbag;
 	private float altezzaSeggiolino;
 	private int idMagazzino;
 	
-	public EntitaVeicolo(int numeroTelaio, String marca, String modello, String colore, float prezzo, boolean stato, char tipo, int numeroPorte, char tipologiaCambio, int numeroAirbag, float altezzaSeggiolino, int idMagazzino) {
+	public EntitaVeicolo(int numeroTelaio, String marca, String modello, String colore, float prezzo, boolean stato, String tipo, int numeroPorte, String tipologiaCambio, int numeroAirbag, float altezzaSeggiolino, int idMagazzino) {
 		this.numeroTelaio = numeroTelaio;
 		this.marca = marca;
 		this.modello = modello;
 		this.colore = colore;
-		this. prezzo = prezzo;
-		this. stato = stato;
-		this. tipo = tipo;
-		this. numeroPorte = numeroPorte;
-		this. tipologiaCambio = tipologiaCambio;
-		this. numeroAirbag = numeroAirbag;
-		this. altezzaSeggiolino = altezzaSeggiolino;
-		this. idMagazzino = idMagazzino;
+		this.prezzo = prezzo;
+		this.stato = stato;
+		this.tipo = tipo;
+		this.numeroPorte = numeroPorte;
+		this.tipologiaCambio = tipologiaCambio;
+		this.numeroAirbag = numeroAirbag;
+		this.altezzaSeggiolino = altezzaSeggiolino;
+		this.idMagazzino = idMagazzino;
 	}
 
 	public int getIdMagazzino() {
@@ -41,7 +41,7 @@ public class EntitaVeicolo {
 		return numeroAirbag;
 	}
 
-	public char getTipologiaCambio() {
+	public String getTipologiaCambio() {
 		return tipologiaCambio;
 	}
 
@@ -49,7 +49,7 @@ public class EntitaVeicolo {
 		return numeroPorte;
 	}
 
-	public char getTipo() {
+	public String getTipo() {
 		return tipo;
 	}
 

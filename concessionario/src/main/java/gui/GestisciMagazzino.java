@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.FlowLayout;
 
+
 public class GestisciMagazzino extends JPanel {
 	
 	private JTextField idMagazzino;
@@ -22,23 +23,47 @@ public class GestisciMagazzino extends JPanel {
 		setLayout(layout);
 		
 		indirizzoField = new JTextField();
-		enterButton = new JButton("Enter");
+		enterButton = new JButton("Inserisci");
 		
 		CellConstraints cc = new CellConstraints();
 		
 		add(new JLabel("Indirizzo:"), cc.xy(1,1));
 		add(indirizzoField, cc.xy(3,1));
 		
-
 		
-		add(loginButton, cc.xy(3, 5));
+		add(enterButton, cc.xy(3, 5));
 		
-		loginButton.addActionListener(Test());
+		enterButton.addActionListener(Test());
 		
 	}
 	
-	private ActionListener Test(){
+	
+	public void showWindow() {
+		JFrame frame = new JFrame("Gestisci magazzini");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
+		JPanel wrapper = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 50));
+	    wrapper.add(this);
+	    
+		frame.setContentPane(wrapper);
+		frame.setSize(450, 350);
+		frame.setLocationRelativeTo(null);
+		frame.setVisible(true);
+	}
+	
+	public String getIndirizzo() {
+		return indirizzoField.getText();
+	}
+	
+	
+	private ActionListener Test(){
+		return new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Pressed");
+                System.out.println("Indirizzo - " + getIndirizzo());
+            }
+        };
 	}
 	
 }
