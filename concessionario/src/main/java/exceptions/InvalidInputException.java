@@ -8,7 +8,7 @@ public class InvalidInputException extends Throwable{
 	public InvalidInputException(String msg){
 		this.msg = msg;
 	}
-	public void showErrorDialogPanel(JPanel panel) {
+	void showErrorDialogPanel(JPanel panel) {
 		JOptionPane.showMessageDialog(panel, msg);
 	}
 }

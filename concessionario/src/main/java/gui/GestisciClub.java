@@ -50,6 +50,10 @@ public class GestisciClub extends JPanel{
 		
 	}
 	
+	// Getters per DAO o salvataggio
+	public String getNome() { return nomeClubField.getText(); }
+	public String getPercentualeDiSconto() { return percentualeDiScontoField.getText(); }
+	
 	private ActionListener enterPressed(){
 		return new ActionListener() {
             @Override

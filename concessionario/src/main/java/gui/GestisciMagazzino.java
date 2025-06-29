@@ -47,9 +47,8 @@ public class GestisciMagazzino extends JPanel {
 	}
 	
 	
-	public String getIndirizzo() {
-		return indirizzoField.getText();
-	}
+	// Getter per DAO o salvataggio
+	public String getIndirizzo() { return indirizzoField.getText(); }
 	
 	
 	private ActionListener enterPressed(){

@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import Principale.*;
 
@@ -68,11 +69,66 @@ public class VisualizzaDati extends JPanel{
         backButton = new JButton("back");
 
         setLayout(new BorderLayout());
-        add(tabbedPane, BorderLayout.CENTER);
+        JScrollPane scrollPane = new JScrollPane(tabbedPane);
+        scrollPane.setPreferredSize(new Dimension(550, 400));
+        add(scrollPane, BorderLayout.CENTER);
         add(backButton, BorderLayout.SOUTH);
         
         backButton.addActionListener(backPressed());
         
+        populateData();
+        
+    }
+    
+    public void populateData() {//Funzione per popolare i panel con dati pertinenti
+    	
+    	//Dati test, sostituire con dati DB
+        listaVeicoli.add("Fiat Panda");
+        listaVeicoli.add("Nissan X");
+
+        listaClienti.add("Mario Verdi");
+        listaClienti.add("Luigi Rossi");
+        listaClienti.add("Roberto Cappuccio");
+        
+        listaVendite.add("Nissan X - Mario Verdi 12/03/05");
+        
+        listaMagazzini.add("Roma");
+        
+        listaClub.add("Oro");
+        listaClub.add("Argento");
+        
+        veicoli.removeAll(); 
+        veicoli.setLayout(new BoxLayout(veicoli, BoxLayout.Y_AXIS));
+        for (String v : listaVeicoli) {
+            veicoli.add(new JLabel(v));
+        }
+
+        clienti.removeAll();
+        clienti.setLayout(new BoxLayout(clienti, BoxLayout.Y_AXIS));
+        for (String c : listaClienti) {
+            clienti.add(new JLabel(c));
+        }
+        
+        vendite.removeAll();
+        vendite.setLayout(new BoxLayout(vendite, BoxLayout.Y_AXIS));
+        for (String c : listaVendite) {
+            vendite.add(new JLabel(c));
+        }
+        
+        magazzini.removeAll();
+        magazzini.setLayout(new BoxLayout(magazzini, BoxLayout.Y_AXIS));
+        for (String c : listaMagazzini) {
+        	magazzini.add(new JLabel(c));
+        }
+        
+        club.removeAll();
+        club.setLayout(new BoxLayout(club, BoxLayout.Y_AXIS));
+        for (String c : listaClub) {
+        	club.add(new JLabel(c));
+        }
+
+        revalidate();
+        repaint();
     }
     
 	private ActionListener backPressed(){

@@ -23,27 +23,30 @@ public class MainProcess {
 		cardLayout = new CardLayout();
 		cardPanel = new JPanel(cardLayout);
 		
+		
+		//Inizializza e aggiungi al cardPanle le diverse shede
 		LoginUtente loginPanel = new LoginUtente(this);
 		MostraFunzioni funzioniPanel = new MostraFunzioni(this);
 		GestisciClienti clientiPanel = new GestisciClienti(this);
 		GestisciClub clubPanel = new GestisciClub(this);
-		
+		GestisciDipendenti dipendentiPanel = new GestisciDipendenti(this);
 		GestisciMagazzino magazzinoPanel = new GestisciMagazzino(this);
-		
 		GestisciVeicoli veicoliPanel = new GestisciVeicoli(this);
-		
+		GestisciVendite venditePanel = new GestisciVendite(this);
 		VisualizzaDati datiPanel = new VisualizzaDati(this);
 		
 		cardPanel.add(loginPanel, "Login");
 		cardPanel.add(funzioniPanel, "Mostra funzioni");
 		cardPanel.add(clientiPanel, "Gestisci clienti");
 		cardPanel.add(clubPanel, "Gestisci club");
-		
+		cardPanel.add(dipendentiPanel, "Gestisci dipendenti");
+		cardPanel.add(magazzinoPanel, "Gestisci magazzino");
+		cardPanel.add(veicoliPanel, "Gestisci veicoli");
+		cardPanel.add(venditePanel, "Gestisci vendite");
 		cardPanel.add(datiPanel, "Visualizza dati");
 		
-		cardPanel.add(veicoliPanel, "Gestisci veicoli");
 		
-		cardPanel.add(magazzinoPanel, "Gestisci magazzino");
+		
 		
 		JPanel wrapper = new JPanel(new GridBagLayout());//Wrapper per centrare la gui
 		wrapper.add(cardPanel);

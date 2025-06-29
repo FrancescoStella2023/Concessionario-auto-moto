@@ -9,5 +9,12 @@ import java.awt.FlowLayout;
 import Principale.*;
 
 public class GestisciVendite extends JPanel{
-
+	
+	
+	MainProcess mainProcess;
+	
+	public GestisciVendite(MainProcess main) {
+		
+		this.mainProcess = main;
+	}
 }

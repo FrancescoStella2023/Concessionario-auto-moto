@@ -78,7 +78,7 @@ public class MostraFunzioni extends JPanel {
 						mainProcess.showPanel("Gestisci club");
 						break;
 					case 2:
-						System.out.println("Gestisci Dipendenti");
+						mainProcess.showPanel("Gestisci dipendenti");
 						break;
 					case 3:
 						mainProcess.showPanel("Gestisci magazzino");
@@ -87,7 +87,7 @@ public class MostraFunzioni extends JPanel {
 						mainProcess.showPanel("Gestisci veicoli");
 						break;
 					case 5:
-						System.out.println("Gestisci Vendite");
+						mainProcess.showPanel("Gestisci vendite");
 						break;
 					case 6:
 						mainProcess.showPanel("Visualizza dati");
