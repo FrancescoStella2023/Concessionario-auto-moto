@@ -42,14 +42,15 @@ public class GestisciDipendenti extends JPanel{
         tabbedPane = new JTabbedPane();
         
         backButton = new JButton("Back");
-
+        
+        //Diviso in diverse funzioi per tenere ordinato
+        creaPannelloVisualizzazione();
         creaPannelloAggiunta();
         creaPannelloCambiaPassword();
-        creaPannelloVisualizzazione();
-
-        tabbedPane.addTab("Aggiungi Dipendente", pannelloAdd);
+        
+        tabbedPane.addTab("Visualizza", pannelloViewDipendenti);
+        tabbedPane.addTab("Aggiungi", pannelloAdd);
         tabbedPane.addTab("Cambia Password", pannelloNewPass);
-        tabbedPane.addTab("Visualizza Dipendenti", pannelloViewDipendenti);
 
         setLayout(new BorderLayout());
         add(tabbedPane, BorderLayout.CENTER);
@@ -76,7 +77,7 @@ public class GestisciDipendenti extends JPanel{
         pannelloAdd.add(isAdminField);
 
         JButton aggiungiButton = new JButton("Aggiungi");
-        aggiungiButton.addActionListener(e -> {
+        aggiungiButton.addActionListener(e -> {//Non creo una funzione a parte per poter far uscire un dialogo di conferma
             String entry = nomeField.getText() + " " + cognomeField.getText();
             listaDipendenti.add(entry);
             JOptionPane.showMessageDialog(this, "Dipendente aggiunto.");

@@ -38,15 +38,47 @@ public class GestisciVeicoli extends JPanel{
     private JRadioButton autoRadio;
     private JRadioButton motoRadio;
     private ButtonGroup tipoGruppo;
+    private JButton removeButton;
+    private JButton backButton;
     
     private MainProcess mainProcess;
-
+    
     public GestisciVeicoli(MainProcess main) {
+    	
     	
     	this.mainProcess = main;
     	
-    	//Primo tentativo andato male, riprovare domani senza bestemiare
+    	tabbedPane = new JTabbedPane();
+        
+        backButton = new JButton("Back");
+        
+        creaPannelloAdd();//Da implementare
+        creaPannelloRemove();
+        
+        tabbedPane.addTab("Aggiungi Veicolo", pannelloAdd);
+        tabbedPane.addTab("Rimuovi Veicolo", pannelloRemove);
+        
+        setLayout(new BorderLayout());
+        add(tabbedPane, BorderLayout.CENTER);
+        add(backButton, BorderLayout.SOUTH);
+        
+        backButton.addActionListener(backPressed());
+    }
+
+    private void creaPannelloAdd() {
+    	pannelloAdd = new JPanel(new GridLayout(6, 2, 10, 10));
     	
+    }
+    
+    private void creaPannelloRemove() {
+    	pannelloRemove = new JPanel(new GridLayout(3, 2, 10, 10));
+    	
+    	numeroTelaioRemove = new JTextField();
+    	removeButton = new JButton("Remove");
+    	
+    	pannelloRemove.add(new JLabel("inserisci Id veicolo da rimuovere"));
+    	pannelloRemove.add(numeroTelaioRemove);
+    	pannelloRemove.add(removeButton);
     }
     
 
@@ -63,5 +95,14 @@ public class GestisciVeicoli extends JPanel{
     public String getNumeroAirbag() { return numeroAirbag.getText(); }
     public String getAltezzaSeggiolino() { return altezzaSeggiolino.getText(); }
     public String getIdMagazzino() { return idMagazzino.getText(); }
+    
+    private ActionListener backPressed(){
+		return new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mainProcess.showPanel("Mostra funzioni");
+            }
+        };
+	}
 
 }
