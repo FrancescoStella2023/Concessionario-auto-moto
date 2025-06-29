@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.FlowLayout;
 import Principale.*;
+import exceptions.*;
 
 public class LoginUtente extends JPanel {
 	
@@ -22,7 +23,7 @@ public class LoginUtente extends JPanel {
 		
 		
 		FormLayout layout = new FormLayout(
-			"right:pref, 4dlu, 100dlu",
+			"right:pref, 4dlu, 150dlu",
 			"pref, 4dlu, pref, 4dlu, pref"
 		);
 		setLayout(layout);
@@ -41,7 +42,7 @@ public class LoginUtente extends JPanel {
 		
 		add(loginButton, cc.xy(3, 5));
 		
-		loginButton.addActionListener(Test());
+		loginButton.addActionListener(loginButtonPressed());
 	}
 	
 	
@@ -55,14 +56,15 @@ public class LoginUtente extends JPanel {
 	}
 	
 	
-	private ActionListener Test() {
+	private ActionListener loginButtonPressed() {
 		 return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Pressed");
-                System.out.println("Username - " + getUsername());
-                System.out.println("Password - " + getPassword());
-                mainProcess.showPanel("Elenco funzioni");
+
+	            System.out.println("Username - " + getUsername());
+	            System.out.println("Password - " + getPassword());
+	            mainProcess.showPanel("Mostra funzioni");
             }
         };
 	}

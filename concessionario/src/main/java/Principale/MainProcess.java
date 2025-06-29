@@ -17,7 +17,7 @@ public class MainProcess {
 		//Creare frame e card layout che ospiteranno le diverse schede
 		frame = new JFrame("Gestore concessionario");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(450,350);
+		frame.setSize(550,400);
 		frame.setLocationRelativeTo(null);
 		
 		cardLayout = new CardLayout();
@@ -26,10 +26,24 @@ public class MainProcess {
 		LoginUtente loginPanel = new LoginUtente(this);
 		MostraFunzioni funzioniPanel = new MostraFunzioni(this);
 		GestisciClienti clientiPanel = new GestisciClienti(this);
+		GestisciClub clubPanel = new GestisciClub(this);
+		
+		GestisciMagazzino magazzinoPanel = new GestisciMagazzino(this);
+		
+		GestisciVeicoli veicoliPanel = new GestisciVeicoli(this);
+		
+		VisualizzaDati datiPanel = new VisualizzaDati(this);
 		
 		cardPanel.add(loginPanel, "Login");
-		cardPanel.add(funzioniPanel, "Elenco funzioni");
+		cardPanel.add(funzioniPanel, "Mostra funzioni");
 		cardPanel.add(clientiPanel, "Gestisci clienti");
+		cardPanel.add(clubPanel, "Gestisci club");
+		
+		cardPanel.add(datiPanel, "Visualizza dati");
+		
+		cardPanel.add(veicoliPanel, "Gestisci veicoli");
+		
+		cardPanel.add(magazzinoPanel, "Gestisci magazzino");
 		
 		JPanel wrapper = new JPanel(new GridBagLayout());//Wrapper per centrare la gui
 		wrapper.add(cardPanel);

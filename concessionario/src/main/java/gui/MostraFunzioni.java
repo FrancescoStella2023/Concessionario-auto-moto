@@ -17,6 +17,7 @@ public class MostraFunzioni extends JPanel {
 	private JButton gestisciVeicoliButton;
 	private JButton gestisciVenditeButton;
 	private JButton visualizzaDatiButton;
+	private JButton backButton;
 	
 	private MainProcess mainProcess;
 		
@@ -26,7 +27,7 @@ public class MostraFunzioni extends JPanel {
 		
 		//Set up grafica interfaccia
 		FormLayout layout = new FormLayout(
-			"40dlu, left:pref",
+			"40dlu, left:pref, 50dlu, pref",
 			"pref, 4dlu, pref, 4dlu, pref, 4dlu, pref, 4dlu, pref, 4dlu, pref, 4dlu, pref"
 		);
 			
@@ -42,6 +43,7 @@ public class MostraFunzioni extends JPanel {
 	    gestisciVeicoliButton = new JButton("Gestisci Veicoli");
 	    gestisciVenditeButton = new JButton("Gestisci Vendite");
 	    visualizzaDatiButton = new JButton("Visualizza Dati");
+	    backButton = new JButton("Esci");
 		
 		add(gestisciClientiButton, cc.xy(2, 1));
 		add(gestisciClubButton, cc.xy(2, 3));
@@ -50,43 +52,48 @@ public class MostraFunzioni extends JPanel {
 		add(gestisciVeicoliButton, cc.xy(2, 9));
 		add(gestisciVenditeButton, cc.xy(2, 11));
 		add(visualizzaDatiButton, cc.xy(2, 13));
+		add(backButton, cc.xy(4, 13));
 		
-		gestisciClientiButton.addActionListener(Test(0));
-		gestisciClubButton.addActionListener(Test(1));
-		gestisciDipendentiButton.addActionListener(Test(2));
-		gestisciMagazzinoButton.addActionListener(Test(3));
-		gestisciVeicoliButton.addActionListener(Test(4));
-		gestisciVenditeButton.addActionListener(Test(5));
-		visualizzaDatiButton.addActionListener(Test(6));
+		gestisciClientiButton.addActionListener(buttonPressed(0));
+		gestisciClubButton.addActionListener(buttonPressed(1));
+		gestisciDipendentiButton.addActionListener(buttonPressed(2));
+		gestisciMagazzinoButton.addActionListener(buttonPressed(3));
+		gestisciVeicoliButton.addActionListener(buttonPressed(4));
+		gestisciVenditeButton.addActionListener(buttonPressed(5));
+		visualizzaDatiButton.addActionListener(buttonPressed(6));
+		backButton.addActionListener(buttonPressed(7));
+		
 	}
 	
 		
-	private ActionListener Test(int numScheda) {//Usa uno switch per aprire le schede corrette
+	private ActionListener buttonPressed(int numScheda) {//Usa uno switch per aprire le schede corrette
 		 return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 				switch (numScheda) {
 					case 0:
-						System.out.println("Gestisci Clienti");
 						mainProcess.showPanel("Gestisci clienti");
 						break;
 					case 1:
-						System.out.println("Gestisci Club");
+						mainProcess.showPanel("Gestisci club");
 						break;
 					case 2:
 						System.out.println("Gestisci Dipendenti");
 						break;
 					case 3:
-						System.out.println("Gestisci Magazzino");
+						mainProcess.showPanel("Gestisci magazzino");
 						break;
 					case 4:
-						System.out.println("Gestisci Veicoli");
+						mainProcess.showPanel("Gestisci veicoli");
 						break;
 					case 5:
 						System.out.println("Gestisci Vendite");
 						break;
 					case 6:
-						System.out.println("Visualizza Dati");
+						mainProcess.showPanel("Visualizza dati");
+						break;
+					case 7:
+						mainProcess.showPanel("Login");
 						break;
 				}
             }

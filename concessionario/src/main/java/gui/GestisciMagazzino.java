@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.FlowLayout;
+import Principale.*;
 
 
 public class GestisciMagazzino extends JPanel {
@@ -13,8 +14,13 @@ public class GestisciMagazzino extends JPanel {
 	private JTextField idMagazzino;
 	private JTextField indirizzoField;
 	private JButton enterButton;
+	private JButton backButton;
 	
-	public GestisciMagazzino() {
+	MainProcess mainProcess;
+	
+	public GestisciMagazzino(MainProcess main) {
+		
+		this.mainProcess = main;
 		
 		FormLayout layout = new FormLayout(
 			"right:pref, 4dlu, 100dlu",
@@ -24,6 +30,7 @@ public class GestisciMagazzino extends JPanel {
 		
 		indirizzoField = new JTextField();
 		enterButton = new JButton("Inserisci");
+		backButton = new JButton("Back");
 		
 		CellConstraints cc = new CellConstraints();
 		
@@ -32,8 +39,10 @@ public class GestisciMagazzino extends JPanel {
 		
 		
 		add(enterButton, cc.xy(3, 5));
+		enterButton.addActionListener(enterPressed());
 		
-		enterButton.addActionListener(Test());
+		add(backButton, cc.xy(1,  5));
+		backButton.addActionListener(backPressed());
 		
 	}
 	
@@ -43,12 +52,21 @@ public class GestisciMagazzino extends JPanel {
 	}
 	
 	
-	private ActionListener Test(){
+	private ActionListener enterPressed(){
 		return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Pressed");
                 System.out.println("Indirizzo - " + getIndirizzo());
+            }
+        };
+	}
+	
+	private ActionListener backPressed(){
+		return new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mainProcess.showPanel("Mostra funzioni");
             }
         };
 	}

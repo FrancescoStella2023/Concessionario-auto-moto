@@ -24,6 +24,7 @@ public class GestisciClienti extends JPanel {
     private JTextField indirizzoField;
     private JTextField idClubField;
 	private JButton enterButton;
+	private JButton backButton;
 	
 	private MainProcess mainProcess;
 	
@@ -36,7 +37,6 @@ public class GestisciClienti extends JPanel {
             "pref, 4dlu, pref, 4dlu, pref, 4dlu, pref, 4dlu, pref, 4dlu, pref, 4dlu, pref, 4dlu, pref, 4dlu, pref"
         );
         setLayout(layout);
-        CellConstraints cc = new CellConstraints();
 
         nomeField = new JTextField();
         cognomeField = new JTextField();
@@ -47,7 +47,11 @@ public class GestisciClienti extends JPanel {
         indirizzoField = new JTextField();
         idClubField = new JTextField();
         
+        
         enterButton = new JButton("Enter");
+        backButton = new JButton("Back");
+        
+        CellConstraints cc = new CellConstraints();
 
         add(new JLabel("Nome:"), cc.xy(1, 1));
         add(nomeField, cc.xy(3, 1));
@@ -74,43 +78,24 @@ public class GestisciClienti extends JPanel {
         add(idClubField, cc.xy(3, 15));
 		
         add(enterButton, cc.xy(3, 17));
+		enterButton.addActionListener(enterPressed());
 		
-		enterButton.addActionListener(Test());
+		add(backButton, cc.xy(1,17));
+		backButton.addActionListener(backPressed());
 	}
 	
-	public String getNome() {
-		return nomeField.getText();
-	}
 	
-	public String getCognome() {
-        return cognomeField.getText();
-    }
+	// Getters per DAO o salvataggio
+	public String getNome() { return nomeField.getText(); }
+	public String getCognome() { return cognomeField.getText(); }
+	public String getEmail() { return emailField.getText(); }
+	public String getNumeroTelefono() { return numeroTelefonoField.getText(); }
+	public String getComune() {  return comuneField.getText(); }
+	public String getNumCivico() { return numCivicoField.getText();  }
+	public String getIndirizzo() {  return indirizzoField.getText(); }
+	public String getIdClub() { return idClubField.getText(); }
 	
-	public String getEmail() {
-        return emailField.getText();
-    }
-    
-    public String getNumeroTelefono() {
-        return numeroTelefonoField.getText();
-    }
-
-    public String getComune() {
-        return comuneField.getText();
-    }
-
-    public String getNumCivico() {
-        return numCivicoField.getText();
-    }
-
-    public String getIndirizzo() {
-        return indirizzoField.getText();
-    }
-
-    public String getIdClub() {
-        return idClubField.getText();
-    }
-	
-	private ActionListener Test(){
+	private ActionListener enterPressed(){
 		return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -123,6 +108,15 @@ public class GestisciClienti extends JPanel {
                 System.out.println("numero civico - " + getNumCivico());
                 System.out.println("indirizzo - " + getIndirizzo());
                 System.out.println("club id - " + getIdClub());
+            }
+        };
+	}
+	
+	private ActionListener backPressed(){
+		return new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mainProcess.showPanel("Mostra funzioni");
             }
         };
 	}
