@@ -22,9 +22,11 @@ public class DAOGestioneVendite implements DAOVendite{
 		ps.setInt(3, vendita.getIdCliente()); 
 		
 		ps.execute();
+		
+		ps.close();//rilascia la risorsa
 	}
 	
-	public void effettuaRestituzione(String dataRestituzione, int idVendita) throws SQLException{
+	public boolean effettuaRestituzione(String dataRestituzione, int idVendita) throws SQLException{
 		String sql = "UPDATE vendite set data_restituzione = '?' WHERE id_vendita = ?";
 		
 		PreparedStatement ps = conn.prepareStatement(sql);
@@ -32,21 +34,27 @@ public class DAOGestioneVendite implements DAOVendite{
 		ps.setString(1, dataRestituzione); //riempie i '?'
 		ps.setInt(2,  idVendita);
 		
-		ps.execute();
+		int righeModificate = ps.executeUpdate();
+		
+		ps.close();//rilascia la risorsa
+		
+		if(righeModificate == 0) return false;
+		else return true;
 	}
 	
 	public int getPercentualeSconto(int idCliente) throws SQLException{
 		//utilizzato solo per mostrare al dipendente che sta effettuando la vendita
 		//quale sarà il prezzo finale, il valore effettivo poi viene calcolato dal trigger
 		
-		String sql = "SELECT cl.percentuale_sconto FROM clienti as c JOIN club as cl ON c.c_id_club = cl.id_club WHERE c.id_cliente = ?";
+		String sql = "SELECT cl.percentuale_di_sconto FROM clienti as c JOIN club as cl ON c.c_id_club = cl.id_club WHERE c.id_cliente = ?";
 		PreparedStatement ps = conn.prepareStatement(sql);
 		
-		ps.setInt(2,  idCliente);
+		ps.setInt(1,  idCliente);
 		
 		ResultSet rs = ps.executeQuery();
-		return rs.getInt(1);
 		
+		ps.close();//rilascia la risorsa
+		return rs.getInt(1);
 		
 	}
 }

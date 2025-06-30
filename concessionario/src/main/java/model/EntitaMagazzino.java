@@ -2,7 +2,7 @@ package model;
 
 public class EntitaMagazzino {
 	private String indirizzo;
-	EntitaMagazzino(String indirizzo){
+	public EntitaMagazzino(String indirizzo){
 		this.indirizzo = indirizzo;
 	}
 	

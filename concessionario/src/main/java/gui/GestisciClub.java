@@ -50,9 +50,11 @@ public class GestisciClub extends JPanel{
 		
 	}
 	
-	// Getters per DAO o salvataggio
+	// Getters per prendere i dati dai field
 	public String getNome() { return nomeClubField.getText(); }
 	public String getPercentualeDiSconto() { return percentualeDiScontoField.getText(); }
+	
+	
 	
 	private ActionListener enterPressed(){
 		return new ActionListener() {

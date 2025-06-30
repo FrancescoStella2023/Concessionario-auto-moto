@@ -20,5 +20,6 @@ public class DAOGestioneClub implements DAOClub{
 		ps.setInt(2, club.getPercentualeSconto());
 		
 		ps.execute();
+		ps.close();//rilascia la risorsa
 	}
 }

@@ -19,6 +19,8 @@ public class DAOGestioneMagazzini implements DAOMagazzini{
 		ps.setString(1, magazzino.getIndirizzo()); //riempie i '?'
 		
 		ps.execute();
+		
+		ps.close();//rilascia la risorsa
 	}
 
 }

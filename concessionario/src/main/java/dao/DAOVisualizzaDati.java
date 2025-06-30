@@ -17,6 +17,8 @@ public class DAOVisualizzaDati implements DAODati{
 		ps.setString(1, nomeTabella); //riempie i '?'
 		
 		ResultSet rs = ps.executeQuery();
+		
+		ps.close();//rilascia la risorsa
 		return rs;
 	}
 

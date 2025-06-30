@@ -1,3 +1,11 @@
+/////
+///
+///
+///	!!NON INSERIRE IL CAMPO ID DIPENDENTE VIENE PRESO DAL DIPENDENTE DELLA SESSIONE IN CORSO
+///
+///
+
+
 package gui;
 
 import com.jgoodies.forms.layout.*;

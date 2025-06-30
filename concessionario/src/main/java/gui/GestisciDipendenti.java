@@ -43,7 +43,7 @@ public class GestisciDipendenti extends JPanel{
         
         backButton = new JButton("Back");
         
-        //Diviso in diverse funzioi per tenere ordinato
+        //Diviso in diverse funzioni per tenere ordinato
         creaPannelloVisualizzazione();
         creaPannelloAggiunta();
         creaPannelloCambiaPassword();

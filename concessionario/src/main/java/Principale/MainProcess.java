@@ -24,7 +24,7 @@ public class MainProcess {
 		cardPanel = new JPanel(cardLayout);
 		
 		
-		//Inizializza e aggiungi al cardPanle le diverse shede
+		//Inizializza e aggiungi al cardPanel le diverse shede
 		LoginUtente loginPanel = new LoginUtente(this);
 		MostraFunzioni funzioniPanel = new MostraFunzioni(this);
 		GestisciClienti clientiPanel = new GestisciClienti(this);

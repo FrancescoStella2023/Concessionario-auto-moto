@@ -32,6 +32,8 @@ public class DAOGestioneClienti implements DAOClienti{
 		ps.setString(8, cliente.getIndirizzo());
 		
 		ps.execute();
+		
+		ps.close();//rilascia la risorsa
 	}
 
 }

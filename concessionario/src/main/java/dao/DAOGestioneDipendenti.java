@@ -32,6 +32,8 @@ public class DAOGestioneDipendenti implements DAODipendenti{
 		
 		int righeModificate = ps.executeUpdate();
 		
+		ps.close();//rilascia la risorsa
+		
 		if(righeModificate == 0) return false;
 		else return true;
 	}
@@ -40,6 +42,8 @@ public class DAOGestioneDipendenti implements DAODipendenti{
 		PreparedStatement ps = conn.prepareStatement(sql);
 		
 		ResultSet rs = ps.executeQuery();
+		
+		ps.close();//rilascia la risorsa
 		return rs;
 		
 	}

@@ -15,4 +15,14 @@ public class ApplicationBusinessLogic {
 	    }
 	    return true;
 	}
+	public static boolean isAllFloat(String stringa) {
+	    if (stringa == null || stringa.isBlank()) return false;
+	    try {
+	        Float.parseFloat(stringa);
+	        return true;
+	    } catch (NumberFormatException e) { //se torna un exception perché i valori non sono validi non è float
+	        return false;
+	    }
+	}
+
 }

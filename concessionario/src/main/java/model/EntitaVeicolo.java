@@ -6,7 +6,6 @@ public class EntitaVeicolo {
 	private String modello;
 	private String colore;
 	private float prezzo;
-	private boolean stato;
 	private String tipo;
 	private int numeroPorte;
 	private String tipologiaCambio;
@@ -14,13 +13,12 @@ public class EntitaVeicolo {
 	private float altezzaSeggiolino;
 	private int idMagazzino;
 	
-	public EntitaVeicolo(int numeroTelaio, String marca, String modello, String colore, float prezzo, boolean stato, String tipo, int numeroPorte, String tipologiaCambio, int numeroAirbag, float altezzaSeggiolino, int idMagazzino) {
+	public EntitaVeicolo(int numeroTelaio, String marca, String modello, String colore, float prezzo, String tipo, int numeroPorte, String tipologiaCambio, int numeroAirbag, float altezzaSeggiolino, int idMagazzino) {
 		this.numeroTelaio = numeroTelaio;
 		this.marca = marca;
 		this.modello = modello;
 		this.colore = colore;
 		this.prezzo = prezzo;
-		this.stato = stato;
 		this.tipo = tipo;
 		this.numeroPorte = numeroPorte;
 		this.tipologiaCambio = tipologiaCambio;
@@ -51,10 +49,6 @@ public class EntitaVeicolo {
 
 	public String getTipo() {
 		return tipo;
-	}
-
-	public boolean isStato() {
-		return stato;
 	}
 
 	public float getPrezzo() {

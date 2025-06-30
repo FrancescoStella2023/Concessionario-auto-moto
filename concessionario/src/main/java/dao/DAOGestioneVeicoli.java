@@ -40,6 +40,7 @@ public class DAOGestioneVeicoli implements DAOVeicoli{
 		
 		
 		ps.execute();
+		ps.close();//rilascia la risorsa
 	}
 	
 	public boolean rimuoviVeicolo(int numeroTelaio) throws SQLException{
@@ -50,6 +51,8 @@ public class DAOGestioneVeicoli implements DAOVeicoli{
 		ps.setInt(1, numeroTelaio);
 		
 		int elementiRimossi = ps.executeUpdate();
+		
+		ps.close();//rilascia la risorsa
 		
 		if(elementiRimossi == 0) return false; //se non è stato eliminato niente
 		else return true;
@@ -66,6 +69,9 @@ public class DAOGestioneVeicoli implements DAOVeicoli{
 		ResultSet rs = ps.executeQuery();
 		
 		float res = rs.getFloat(1);
+		
+		ps.close();//rilascia la risorsa
+		rs.close();//rilascia la risorsa
 		return res;
 	}
 }
