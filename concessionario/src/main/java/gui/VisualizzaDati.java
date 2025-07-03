@@ -12,12 +12,9 @@ import java.awt.FlowLayout;
 import Principale.*;
 
 public class VisualizzaDati extends JPanel{
-	
-	private boolean isAdmin;
 
     private ArrayList<String> listaVeicoli;
     private ArrayList<String> listaClienti;
-    private ArrayList<String> listaDipendenti; // solo se isAdmin == true
     private ArrayList<String> listaMagazzini;
     private ArrayList<String> listaVendite;
     private ArrayList<String> listaClub;
@@ -27,7 +24,6 @@ public class VisualizzaDati extends JPanel{
     private JPanel veicoli;
     private JPanel clienti;
     private JPanel vendite;
-    private JPanel dipendenti;
     private JPanel magazzini;
     private JPanel club;
     
@@ -42,7 +38,6 @@ public class VisualizzaDati extends JPanel{
     	
     	listaVeicoli = new ArrayList<>();
         listaClienti = new ArrayList<>();
-        listaDipendenti = new ArrayList<>();
         listaMagazzini = new ArrayList<>();
         listaVendite = new ArrayList<>();
         listaClub = new ArrayList<>();
@@ -54,17 +49,13 @@ public class VisualizzaDati extends JPanel{
         vendite = new JPanel();
         magazzini = new JPanel();
         club = new JPanel();
-
-        tabbedPane.addTab("Veicoli", veicoli);
-        tabbedPane.addTab("Clienti", clienti);
-        tabbedPane.addTab("Vendite", vendite);
-        tabbedPane.addTab("Magazzini", magazzini);
-        tabbedPane.addTab("Club", club);
-
-        if (isAdmin) {
-            dipendenti = new JPanel();
-            tabbedPane.addTab("Dipendenti", dipendenti);
-        }
+        
+        //in caso ci siano tante scritte con lo scroll panel esce la barra dell'overflow
+        tabbedPane.addTab("Veicoli", new JScrollPane(veicoli));
+        tabbedPane.addTab("Clienti", new JScrollPane(clienti));
+        tabbedPane.addTab("Vendite", new JScrollPane(vendite));
+        tabbedPane.addTab("Magazzini", new JScrollPane(magazzini));
+        tabbedPane.addTab("Club", new JScrollPane(club));
         
         backButton = new JButton("back");
 

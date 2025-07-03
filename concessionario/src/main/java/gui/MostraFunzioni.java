@@ -17,7 +17,6 @@ public class MostraFunzioni extends JPanel {
 	private JButton gestisciVeicoliButton;
 	private JButton gestisciVenditeButton;
 	private JButton visualizzaDatiButton;
-	private JButton backButton;
 	
 	private MainProcess mainProcess;
 		
@@ -43,7 +42,7 @@ public class MostraFunzioni extends JPanel {
 	    gestisciVeicoliButton = new JButton("Gestisci Veicoli");
 	    gestisciVenditeButton = new JButton("Gestisci Vendite");
 	    visualizzaDatiButton = new JButton("Visualizza Dati");
-	    backButton = new JButton("Esci");
+	    
 		
 		add(gestisciClientiButton, cc.xy(2, 1));
 		add(gestisciClubButton, cc.xy(2, 3));
@@ -52,7 +51,7 @@ public class MostraFunzioni extends JPanel {
 		add(gestisciVeicoliButton, cc.xy(2, 9));
 		add(gestisciVenditeButton, cc.xy(2, 11));
 		add(visualizzaDatiButton, cc.xy(2, 13));
-		add(backButton, cc.xy(4, 13));
+		
 		
 		gestisciClientiButton.addActionListener(buttonPressed(0));
 		gestisciClubButton.addActionListener(buttonPressed(1));
@@ -61,7 +60,7 @@ public class MostraFunzioni extends JPanel {
 		gestisciVeicoliButton.addActionListener(buttonPressed(4));
 		gestisciVenditeButton.addActionListener(buttonPressed(5));
 		visualizzaDatiButton.addActionListener(buttonPressed(6));
-		backButton.addActionListener(buttonPressed(7));
+		
 		
 	}
 	
