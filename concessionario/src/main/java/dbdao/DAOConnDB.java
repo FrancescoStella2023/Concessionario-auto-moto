@@ -15,7 +15,7 @@ public class DAOConnDB implements DAOConnection{
 	}
 	
 	public boolean verificaAdmin(int idDipendente) throws SQLException {
-	    String sql = "SELECT isAdmin FROM dipendenti WHERE id_dipendente = ?";
+	    String sql = "SELECT is_admin FROM dipendenti WHERE id_dipendente = ?";
 	    PreparedStatement ps = conn.prepareStatement(sql);
 	    ps.setInt(1, idDipendente); 
 

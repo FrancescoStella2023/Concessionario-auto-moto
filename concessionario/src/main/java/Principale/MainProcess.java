@@ -4,13 +4,19 @@ import gui.*;
 
 
 import javax.swing.*;
+
+import controller.GestisciLoginAndConnection;
+
 import java.awt.*;
+import java.sql.SQLException;
 
 public class MainProcess {
 	
 	private JFrame frame;
 	private JPanel cardPanel;
 	private CardLayout cardLayout;
+	private MostraFunzioni funzioniPanel;
+	
 	
 	public MainProcess() {
 		
@@ -24,9 +30,9 @@ public class MainProcess {
 		cardPanel = new JPanel(cardLayout);
 		
 		
-		//Inizializza e aggiungi al cardPanel le diverse shede
+		//Inizializza e aggiungi al cardPanel le diverse schede
 		LoginUtente loginPanel = new LoginUtente(this);
-		MostraFunzioni funzioniPanel = new MostraFunzioni(this);
+		funzioniPanel = new MostraFunzioni(this);
 		GestisciClienti clientiPanel = new GestisciClienti(this);
 		GestisciClub clubPanel = new GestisciClub(this);
 		GestisciDipendenti dipendentiPanel = new GestisciDipendenti(this);
@@ -60,8 +66,20 @@ public class MainProcess {
 		cardLayout.show(cardPanel, name);
 	}
 	
+	
+	public MostraFunzioni getMostraFunzioni() {
+		return funzioniPanel;
+	}
    
 	public static void main(String args[]) {//Fa partire il programma
+		
+		try{ //avvia la connessione al database
+			GestisciLoginAndConnection.startConnection("postgres", "20052206");
+		}
+		catch(SQLException ex) {
+			ex.printStackTrace();
+		}
+		
 		SwingUtilities.invokeLater(() -> new MainProcess());
 		
 	}

@@ -15,6 +15,7 @@ public class InfoDipendenteLogic {
 	}
 
 	public static boolean isAdmin() {
+		System.out.println(isAdmin);
 		return isAdmin;
 	}
 	

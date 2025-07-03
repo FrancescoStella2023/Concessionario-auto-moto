@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.FlowLayout;
 import Principale.*;
+import controller.GestisciLoginAndConnection;
 import exceptions.*;
 
 public class LoginUtente extends JPanel {
@@ -42,7 +43,19 @@ public class LoginUtente extends JPanel {
 		
 		add(loginButton, cc.xy(3, 5));
 		
-		loginButton.addActionListener(loginButtonPressed());
+		loginButton.addActionListener(e -> {try{
+        	
+        	GestisciLoginAndConnection.startLogin(getUsername(), getPassword());
+        	System.out.println("Pressed");
+
+            System.out.println("Username - " + getUsername());
+            System.out.println("Password - " + getPassword());
+            mainProcess.getMostraFunzioni().AggiornaBottoni();
+            mainProcess.showPanel("Mostra funzioni");
+        }
+        catch(InvalidCredentialsException ex) {
+        	ex.showErrorDialogPanel(this);
+        }});
 	}
 	
 	
@@ -60,11 +73,7 @@ public class LoginUtente extends JPanel {
 		 return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Pressed");
-
-	            System.out.println("Username - " + getUsername());
-	            System.out.println("Password - " + getPassword());
-	            mainProcess.showPanel("Mostra funzioni");
+                
             }
         };
 	}

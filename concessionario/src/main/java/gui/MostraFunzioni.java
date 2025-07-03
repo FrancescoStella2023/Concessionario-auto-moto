@@ -5,8 +5,10 @@ import javax.swing.*;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import Principale.*;
+import controller.InfoDipendenteLogic;
 
 public class MostraFunzioni extends JPanel {
 		
@@ -27,7 +29,7 @@ public class MostraFunzioni extends JPanel {
 		//Set up grafica interfaccia
 		FormLayout layout = new FormLayout(
 			"40dlu, left:pref, 50dlu, pref",
-			"pref, 4dlu, pref, 4dlu, pref, 4dlu, pref, 4dlu, pref, 4dlu, pref, 4dlu, pref"
+			"pref, 4dlu, pref, 4dlu, pref, 4dlu, pref, 4dlu, pref, 4dlu, pref, 4dlu, pref, 4dlu, pref"
 		);
 			
 		setLayout(layout);
@@ -35,22 +37,33 @@ public class MostraFunzioni extends JPanel {
 		
 		//Da implementare un if check per is admin che rende visibili solo i bottoni a cui l'utente ha accesso
 		
+		//Utente
 		gestisciClientiButton = new JButton("Gestisci Clienti");
-	    gestisciClubButton = new JButton("Gestisci Club");
-	    gestisciDipendentiButton = new JButton("Gestisci Dipendenti");
-	    gestisciMagazzinoButton = new JButton("Gestisci Magazzino");
 	    gestisciVeicoliButton = new JButton("Gestisci Veicoli");
 	    gestisciVenditeButton = new JButton("Gestisci Vendite");
 	    visualizzaDatiButton = new JButton("Visualizza Dati");
 	    
-		
-		add(gestisciClientiButton, cc.xy(2, 1));
-		add(gestisciClubButton, cc.xy(2, 3));
-		add(gestisciDipendentiButton, cc.xy(2, 5));
-		add(gestisciMagazzinoButton, cc.xy(2, 7));
-		add(gestisciVeicoliButton, cc.xy(2, 9));
-		add(gestisciVenditeButton, cc.xy(2, 11));
-		add(visualizzaDatiButton, cc.xy(2, 13));
+	    //Admin
+	    gestisciDipendentiButton = new JButton("Gestisci Dipendenti");
+	    gestisciMagazzinoButton = new JButton("Gestisci Magazzino");
+	    gestisciClubButton = new JButton("Gestisci Club");
+	    
+	    
+	    Dimension buttonSize = new Dimension(220, 25);
+	    gestisciClientiButton.setPreferredSize(buttonSize);
+	    gestisciClubButton.setPreferredSize(buttonSize);
+	    gestisciDipendentiButton.setPreferredSize(buttonSize);
+	    gestisciMagazzinoButton.setPreferredSize(buttonSize);
+	    gestisciVeicoliButton.setPreferredSize(buttonSize);
+	    gestisciVenditeButton.setPreferredSize(buttonSize);
+	    visualizzaDatiButton.setPreferredSize(buttonSize);
+	    
+	    
+		add(new JLabel("Seleziona un operazione da effetuare:"), cc.xy(2,1));
+		add(gestisciClientiButton, cc.xy(2, 3));
+		add(gestisciVeicoliButton, cc.xy(2, 5));
+		add(gestisciVenditeButton, cc.xy(2, 7));
+		add(visualizzaDatiButton, cc.xy(2, 9));
 		
 		
 		gestisciClientiButton.addActionListener(buttonPressed(0));
@@ -62,6 +75,18 @@ public class MostraFunzioni extends JPanel {
 		visualizzaDatiButton.addActionListener(buttonPressed(6));
 		
 		
+	}
+	
+	
+	public void AggiornaBottoni() {
+		if (InfoDipendenteLogic.isAdmin()) {
+			CellConstraints cc = new CellConstraints();
+			add(gestisciMagazzinoButton, cc.xy(2, 11));
+			add(gestisciDipendentiButton, cc.xy(2, 13));
+			add(gestisciClubButton, cc.xy(2, 15));
+			revalidate();
+			repaint();
+		}
 	}
 	
 		
