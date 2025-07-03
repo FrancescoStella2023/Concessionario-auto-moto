@@ -23,7 +23,7 @@ public class MainProcess {
 		//Creare frame e card layout che ospiteranno le diverse schede
 		frame = new JFrame("Gestore concessionario");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(550,400);
+		frame.setSize(600,450);
 		frame.setLocationRelativeTo(null);
 		
 		cardLayout = new CardLayout();
@@ -52,8 +52,6 @@ public class MainProcess {
 		cardPanel.add(datiPanel, "Visualizza dati");
 		
 		
-		
-		
 		JPanel wrapper = new JPanel(new GridBagLayout());//Wrapper per centrare la gui
 		wrapper.add(cardPanel);
 		
@@ -67,7 +65,7 @@ public class MainProcess {
 	}
 	
 	
-	public MostraFunzioni getMostraFunzioni() {
+	public MostraFunzioni getMostraFunzioni() {//Passa funzioniPanel per aggiornarlo in Login
 		return funzioniPanel;
 	}
    

@@ -5,16 +5,13 @@ import javax.swing.*;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.FlowLayout;
+import java.awt.Dimension;
 import Principale.*;
+import controller.ProcessQueryGestioneClienti;
+import exceptions.InvalidInputException;
 
 public class GestisciClienti extends JPanel {
 	
-	/*
-	 * 	TODO:
-	 * 		impostare a zero il valore del club se è vuoto
-	 * 
-	 * */
     private JTextField nomeField;
     private JTextField cognomeField;
     private JTextField emailField;
@@ -53,32 +50,47 @@ public class GestisciClienti extends JPanel {
         
         CellConstraints cc = new CellConstraints();
 
-        add(new JLabel("Nome:"), cc.xy(1, 1));
+        add(new JLabel("Nome (solo caratteri):"), cc.xy(1, 1));
         add(nomeField, cc.xy(3, 1));
 
-        add(new JLabel("Cognome:"), cc.xy(1, 3));
+        add(new JLabel("Cognome (solo caratteri):"), cc.xy(1, 3));
         add(cognomeField, cc.xy(3, 3));
 
-        add(new JLabel("Email:"), cc.xy(1, 5));
+        add(new JLabel("Email (almeno una @):"), cc.xy(1, 5));
         add(emailField, cc.xy(3, 5));
 
-        add(new JLabel("Telefono:"), cc.xy(1, 7));
+        add(new JLabel("Telefono (solo cifre):"), cc.xy(1, 7));
         add(numeroTelefonoField, cc.xy(3, 7));
 
-        add(new JLabel("Comune:"), cc.xy(1, 9));
+        add(new JLabel("Comune (solo caratteri):"), cc.xy(1, 9));
         add(comuneField, cc.xy(3, 9));
 
-        add(new JLabel("Num. Civico:"), cc.xy(1, 11));
+        add(new JLabel("Num. Civico (solo cifre):"), cc.xy(1, 11));
         add(numCivicoField, cc.xy(3, 11));
 
-        add(new JLabel("Indirizzo:"), cc.xy(1, 13));
+        add(new JLabel("Indirizzo (solo caratteri):"), cc.xy(1, 13));
         add(indirizzoField, cc.xy(3, 13));
 
-        add(new JLabel("ID Club:"), cc.xy(1, 15));
+        add(new JLabel("ID Club (solo cifre, 0 nessun club):"), cc.xy(1, 15));
         add(idClubField, cc.xy(3, 15));
 		
+		
+		Dimension buttonSize = new Dimension(220, 25);
+	    enterButton.setPreferredSize(buttonSize);
         add(enterButton, cc.xy(3, 17));
-		enterButton.addActionListener(enterPressed());
+        
+        
+        
+		enterButton.addActionListener(e -> {
+			try {
+				
+				ProcessQueryGestioneClienti.eseguiQueryNewCliente(getNome(), getCognome(), getEmail(), getNumeroTelefono(), getComune(), getNumCivico(), getIndirizzo(), getIdClub());
+				JOptionPane.showMessageDialog(this, "Cliente inserito con successo.");
+			}
+			catch(InvalidInputException ex) {
+				ex.showErrorDialogPanel(this);
+			}
+		});
 		
 		add(backButton, cc.xy(1,17));
 		backButton.addActionListener(backPressed());
@@ -86,33 +98,27 @@ public class GestisciClienti extends JPanel {
 	
 	
 	// Getters per DAO o salvataggio
-	public String getNome() { return nomeField.getText(); }
-	public String getCognome() { return cognomeField.getText(); }
-	public String getEmail() { return emailField.getText(); }
-	public String getNumeroTelefono() { return numeroTelefonoField.getText(); }
-	public String getComune() {  return comuneField.getText(); }
-	public String getNumCivico() { return numCivicoField.getText();  }
-	public String getIndirizzo() {  return indirizzoField.getText(); }
-	public String getIdClub() { return idClubField.getText(); }
+	private String getNome() { return nomeField.getText(); }
+	private String getCognome() { return cognomeField.getText(); }
+	private String getEmail() { return emailField.getText(); }
+	private String getNumeroTelefono() { return numeroTelefonoField.getText(); }
+	private String getComune() {  return comuneField.getText(); }
+	private String getNumCivico() { return numCivicoField.getText();  }
+	private String getIndirizzo() {  return indirizzoField.getText(); }
 	
-	private ActionListener enterPressed(){
-		return new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("Pressed");
-                System.out.println("nome - " + getNome());
-                System.out.println("cogome - " + getCognome());
-                System.out.println("email - " + getEmail());
-                System.out.println("numero telefono - " + getNumeroTelefono());
-                System.out.println("comun - " + getComune());
-                System.out.println("numero civico - " + getNumCivico());
-                System.out.println("indirizzo - " + getIndirizzo());
-                System.out.println("club id - " + getIdClub());
-            }
-        };
+	private String getIdClub() {//impostare a zero il valore del club se è vuoto
+		 String idClub = idClubField.getText(); 
+		 
+		 if (idClub.isEmpty()) {
+			 return "0";
+		} else {
+			return idClub;
+		}
+		 
 	}
 	
-	private ActionListener backPressed(){
+	
+	private ActionListener backPressed(){//Ritorna a MostraFunzioni
 		return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

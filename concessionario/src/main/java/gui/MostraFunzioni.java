@@ -59,7 +59,7 @@ public class MostraFunzioni extends JPanel {
 	    visualizzaDatiButton.setPreferredSize(buttonSize);
 	    
 	    
-		add(new JLabel("Seleziona un operazione da effetuare:"), cc.xy(2,1));
+		add(new JLabel("Seleziona un operazione da effettuare:"), cc.xy(2,1));
 		add(gestisciClientiButton, cc.xy(2, 3));
 		add(gestisciVeicoliButton, cc.xy(2, 5));
 		add(gestisciVenditeButton, cc.xy(2, 7));

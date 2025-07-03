@@ -25,7 +25,7 @@ public class LoginUtente extends JPanel {
 		
 		FormLayout layout = new FormLayout(
 			"right:pref, 4dlu, 150dlu",
-			"pref, 4dlu, pref, 4dlu, pref"
+			"75dlu, pref, 4dlu, pref, 4dlu, pref"
 		);
 		setLayout(layout);
 		
@@ -35,21 +35,17 @@ public class LoginUtente extends JPanel {
 		
 		CellConstraints cc = new CellConstraints();
 		
-		add(new JLabel("Username:"), cc.xy(1,1));
-		add(usernameField, cc.xy(3,1));
+		add(new JLabel("Username:"), cc.xy(1,2));
+		add(usernameField, cc.xy(3,2));
 		
-		add(new JLabel("Password:"), cc.xy(1,3));
-		add(passwordField, cc.xy(3,3));
+		add(new JLabel("Password:"), cc.xy(1,4));
+		add(passwordField, cc.xy(3,4));
 		
-		add(loginButton, cc.xy(3, 5));
+		add(loginButton, cc.xy(3, 6));
 		
 		loginButton.addActionListener(e -> {try{
         	
         	GestisciLoginAndConnection.startLogin(getUsername(), getPassword());
-        	System.out.println("Pressed");
-
-            System.out.println("Username - " + getUsername());
-            System.out.println("Password - " + getPassword());
             mainProcess.getMostraFunzioni().AggiornaBottoni();
             mainProcess.showPanel("Mostra funzioni");
         }
@@ -68,13 +64,4 @@ public class LoginUtente extends JPanel {
 		return new String(passwordField.getPassword());
 	}
 	
-	
-	private ActionListener loginButtonPressed() {
-		 return new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                
-            }
-        };
-	}
 }

@@ -68,10 +68,10 @@ public class DAOGestioneVeicoli implements DAOVeicoli{
 		
 		ResultSet rs = ps.executeQuery();
 		
+		rs.next();
 		float res = rs.getFloat(1);
 		
 		ps.close();//rilascia la risorsa
-		rs.close();//rilascia la risorsa
 		return res;
 	}
 }

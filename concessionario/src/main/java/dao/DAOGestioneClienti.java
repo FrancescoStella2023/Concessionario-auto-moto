@@ -2,6 +2,7 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import dbdao.DAOConnDB;
@@ -17,12 +18,8 @@ public class DAOGestioneClienti implements DAOClienti{
 		
 		PreparedStatement ps = conn.prepareStatement(sql);
 		
-		if(cliente.getIdClub() == 0) { //se l'id del club è zero, significa che non è in nessun club
-			ps.setNull(1, java.sql.Types.INTEGER); //mette a null il valore per il club
-		}
-		else {
-			ps.setInt(1,cliente.getIdClub());
-		}
+		ps.setInt(1,cliente.getIdClub());
+		
 		ps.setString(2, cliente.getNome()); //riempie i '?'
 		ps.setString(3,  cliente.getCognome());
 		ps.setString(4, cliente.getEmail()); 
@@ -35,5 +32,15 @@ public class DAOGestioneClienti implements DAOClienti{
 		
 		ps.close();//rilascia la risorsa
 	}
-
+	public boolean checkClubCliente(int idClub) throws SQLException {
+		String sql = "SELECT * FROM club where id_club = ?";
+		
+		PreparedStatement ps = conn.prepareStatement(sql);
+		
+		ps.setInt(1, idClub); //riempie i '?'
+		
+		ResultSet rs = ps.executeQuery();
+		if(rs.next()) return true;
+		else return false;
+	}
 }

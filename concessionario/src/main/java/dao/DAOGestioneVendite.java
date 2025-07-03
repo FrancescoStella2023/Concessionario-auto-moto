@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import controller.InfoDipendenteLogic;
 import dbdao.DAOConnDB;
 import model.EntitaVendite;
 
@@ -13,12 +14,12 @@ public class DAOGestioneVendite implements DAOVendite{
 	private Connection conn = new DAOConnDB().getConn();
 	
 	public void aggiungiVendita(EntitaVendite vendita) throws SQLException{
-		String sql = "INSERT INTO vendite(v_numero_telaio, v_id_dipendente, v_id_cliente) values(?, ?, ?)";
+		String sql = "INSERT INTO vendite(v_id_dipendente, v_numero_telaio, v_id_cliente) values(?, ?, ?)";
 		
 		PreparedStatement ps = conn.prepareStatement(sql);
 		
-		ps.setInt(1, vendita.getNumeroTelaio()); //riempie i '?'
-		ps.setInt(2,  vendita.getIdDipendente());
+		ps.setInt(1, InfoDipendenteLogic.getIdDipendente());
+		ps.setInt(2, vendita.getNumeroTelaio()); //riempie i '?'
 		ps.setInt(3, vendita.getIdCliente()); 
 		
 		ps.execute();
@@ -53,7 +54,7 @@ public class DAOGestioneVendite implements DAOVendite{
 		
 		ResultSet rs = ps.executeQuery();
 		
-		ps.close();//rilascia la risorsa
+		rs.next();
 		return rs.getInt(1);
 		
 	}

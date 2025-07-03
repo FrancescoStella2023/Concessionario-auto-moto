@@ -13,11 +13,11 @@ import Principale.*;
 
 public class VisualizzaDati extends JPanel{
 
-    private ArrayList<String> listaVeicoli;
-    private ArrayList<String> listaClienti;
-    private ArrayList<String> listaMagazzini;
-    private ArrayList<String> listaVendite;
-    private ArrayList<String> listaClub;
+    private ArrayList<String[]> listaVeicoli;
+    private ArrayList<String[]> listaClienti;
+    private ArrayList<String[]> listaMagazzini;
+    private ArrayList<String[]> listaVendite;
+    private ArrayList<String[]> listaClub;
 
     private JTabbedPane tabbedPane;
 

@@ -2,6 +2,7 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import dbdao.DAOConnDB;
@@ -22,4 +23,5 @@ public class DAOGestioneClub implements DAOClub{
 		ps.execute();
 		ps.close();//rilascia la risorsa
 	}
+	
 }
