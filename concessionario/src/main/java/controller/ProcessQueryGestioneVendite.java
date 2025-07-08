@@ -22,7 +22,7 @@ public class ProcessQueryGestioneVendite {
 				EntitaVendite vendita = new EntitaVendite(dataVendita, idDipendente, idCliInt, numTelaioInt);
 				daoVen.aggiungiVendita(vendita);
 			}
-			else throw new InvalidInputException("Numero veicolo o cliente non validi, riprova.");//altrimenti lancia l'eccezione
+			else throw new InvalidInputException("Dati inseriti non validi, riprova.");//altrimenti lancia l'eccezione
 		}
 		catch(SQLException ex) {//gestisce gli errori lanciati dal db
 			switch(ex.getSQLState()) {
