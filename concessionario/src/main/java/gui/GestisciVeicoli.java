@@ -25,6 +25,7 @@ public class GestisciVeicoli extends JPanel{
     private JTextField numeroAirbag;
     private JTextField altezzaSeggiolino;
     private JTextField idMagazzino;
+    private JButton addButton;
 
     private JPanel pannelloAdd;
     private JPanel pannelloRemove;
@@ -58,6 +59,9 @@ public class GestisciVeicoli extends JPanel{
         add(tabbedPane, BorderLayout.CENTER);
         add(backButton, BorderLayout.SOUTH);
         
+        addButton.addActionListener(e -> {
+        	//TO DO
+        });
         backButton.addActionListener(backPressed());
     }
     
@@ -66,7 +70,7 @@ public class GestisciVeicoli extends JPanel{
     	pannelloAdd = new JPanel();
     	FormLayout layout = new FormLayout(
         	    "right:pref, 4dlu, 150dlu",
-        	    "pref, 4dlu, pref, 4dlu, pref, 4dlu, pref, 4dlu, pref, 4dlu, pref, 4dlu, pref, 4dlu, pref, 4dlu, pref, 4dlu, pref, 4dlu, pref, 4dlu, pref"
+        	    "pref, 4dlu, pref, 4dlu, pref, 4dlu, pref, 4dlu, pref, 4dlu, pref, 4dlu, pref, 4dlu, pref, 4dlu, pref, 4dlu, pref, 4dlu, pref, 4dlu, pref, 4dlu, pref"
         	);
         pannelloAdd.setLayout(layout);
         CellConstraints cc = new CellConstraints();
@@ -82,6 +86,7 @@ public class GestisciVeicoli extends JPanel{
         numeroAirbag = new JTextField();
         altezzaSeggiolino = new JTextField();
         idMagazzino = new JTextField();
+        addButton = new JButton("Aggiungi veicolo");
         tipoField = new JTextField(); //Nascosto, contiene solo informazioni
         
         autoRadio = new JRadioButton("Auto");
@@ -136,6 +141,8 @@ public class GestisciVeicoli extends JPanel{
 
         pannelloAdd.add(new JLabel("ID Magazzino:"), cc.xy(1, 23));
         pannelloAdd.add(idMagazzino, cc.xy(3, 23));
+        
+        pannelloAdd.add(addButton, cc.xy(3, 25));
 
         tipoField.setVisible(false);
         pannelloAdd.add(tipoField, cc.xy(1, 1));
