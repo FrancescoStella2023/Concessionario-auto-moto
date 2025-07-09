@@ -69,6 +69,10 @@ public class MainProcess {
 		return funzioniPanel;
 	}
    
+	public JFrame getFrame() { //ritorna il frame, usato per cambiare il nome dinamicamente alla finestra
+		return frame;
+	}
+	
 	public static void main(String args[]) {//Fa partire il programma
 		
 		try{ //avvia la connessione al database

@@ -26,6 +26,8 @@ public class MostraFunzioni extends JPanel {
 		
 		this.mainProcess = main;//Accesso al mainProcess per chiamare showPanel
 		
+		mainProcess.getFrame().setTitle("Gestore Concessionario - " + "id dipendente: " + InfoDipendenteLogic.getIdDipendente() + " - privilegi admin: " + InfoDipendenteLogic.isAdmin());
+		
 		//Set up grafica interfaccia
 		FormLayout layout = new FormLayout(
 			"40dlu, left:pref, 50dlu, pref",

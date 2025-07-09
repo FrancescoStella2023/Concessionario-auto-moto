@@ -4,23 +4,27 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.swing.JTextField;
+
 import dao.DAOGestioneDipendenti;
 import exceptions.InvalidInputException;
 import model.EntitaDipendente;
 
 public class ProcessQueryGestioneDipendenti {
 	
-	public static void eseguiQueryNewDipendente(String nome, String cognome, String password, boolean isAdmin) throws InvalidInputException{
+	public static void eseguiQueryNewDipendente(String nome, String cognome, String password, String isAdmin) throws InvalidInputException{
 		
 		DAOGestioneDipendenti daoDip = new DAOGestioneDipendenti();
 		try {
 			if(ApplicationBusinessLogic.isAllString(nome) && ApplicationBusinessLogic.isAllString(cognome)) {//verifica se i dati sono validi
 				
-				EntitaDipendente dip = new EntitaDipendente(nome, cognome, password, isAdmin);
+				boolean isAdm = Boolean.valueOf(isAdmin);
+				
+				EntitaDipendente dip = new EntitaDipendente(nome, cognome, password, isAdm);
 				
 				daoDip.aggiungiDipendente(dip);
 			}
-			else throw new InvalidInputException("Dati inseriti non validi, riprovare.");//altrimenti lancia l'eccezione
+			else throw new InvalidInputException("Campi vuoti o non validi, riprova., riprovare.");//altrimenti lancia l'eccezione
 		}
 		catch(SQLException ex) {//gestisce gli errori lanciati dal db
 			switch(ex.getSQLState()) {
@@ -43,6 +47,9 @@ public class ProcessQueryGestioneDipendenti {
 				//in caso positivo processa i dati
 				int idDipInt = Integer.parseInt(idDipendente);
 				if(!daoDip.cambiaPassword(idDipInt, password)) throw new InvalidInputException("Dipendente inesistente"); //in caso non venga modificata nessuna tupla, viene comunicato all'utente
+			}
+			else{
+				throw new InvalidInputException("Campi vuoti o non validi, riprova., riprova.");
 			}
 		}
 		catch(SQLException ex) {//gestisce gli errori lanciati dal db

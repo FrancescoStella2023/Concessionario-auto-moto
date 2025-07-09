@@ -6,6 +6,8 @@ import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.FlowLayout;
+import java.awt.Font;
+
 import Principale.*;
 import controller.GestisciLoginAndConnection;
 import exceptions.*;
@@ -14,6 +16,7 @@ public class LoginUtente extends JPanel {
 	
 	private JTextField usernameField;
 	private JPasswordField passwordField;
+	private JLabel label;
 	private JButton loginButton;
 	
 	private MainProcess mainProcess;
@@ -29,13 +32,16 @@ public class LoginUtente extends JPanel {
 		);
 		setLayout(layout);
 		
+		label = new JLabel("Inserisci le credenziali per accedere");
+		label.setFont(label.getFont().deriveFont(java.awt.Font.BOLD, 13f));
 		usernameField = new JTextField();
 		passwordField = new JPasswordField();
 		loginButton = new JButton("Login");
 		
 		CellConstraints cc = new CellConstraints();
 		
-		add(new JLabel("Username:"), cc.xy(1,2));
+		add(label, cc.xy(1, 1));
+		add(new JLabel("Username (id dipendente):"), cc.xy(1,2));
 		add(usernameField, cc.xy(3,2));
 		
 		add(new JLabel("Password:"), cc.xy(1,4));

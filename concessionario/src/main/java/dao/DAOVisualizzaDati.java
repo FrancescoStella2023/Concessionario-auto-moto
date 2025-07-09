@@ -11,14 +11,11 @@ public class DAOVisualizzaDati implements DAODati{
 	private Connection conn = new DAOConnDB().getConn();
 	
 	public ResultSet visualizzaDati(String nomeTabella) throws SQLException{
-		String sql = "SELECT * FROM ?";
+		String sql = "SELECT * FROM " + nomeTabella; //non viene fatto il controllo per l'SQL injection perchè il nome viene cablato nel codice
 		PreparedStatement ps = conn.prepareStatement(sql);
-		
-		ps.setString(1, nomeTabella); //riempie i '?'
-		
+				
 		ResultSet rs = ps.executeQuery();
 		
-		ps.close();//rilascia la risorsa
 		return rs;
 	}
 

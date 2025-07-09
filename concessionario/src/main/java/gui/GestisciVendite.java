@@ -4,8 +4,10 @@ import com.jgoodies.forms.layout.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 import Principale.*;
 import controller.ProcessQueryGestioneVendite;
@@ -132,11 +134,26 @@ public class GestisciVendite extends JPanel {
         });
     }
     
-    private String getDataVendita() { return dataVenditaField.getText(); }
+    private Date getDataVendita() throws InvalidInputException {
+	    try {
+	        LocalDate data = LocalDate.parse(dataVenditaField.getText(), DateTimeFormatter.ISO_LOCAL_DATE);
+	        return Date.valueOf(data);
+	    } catch (DateTimeParseException e) {
+	        throw new InvalidInputException("Formato data vendita non valido. Usa YYYY-MM-DD.");
+	    }
+	}
 	private String getIdCliente() { return idClienteEsistenteField.getText(); }
 	private String getNumeroTelaio() { return numeroTelaioField.getText(); }
 	
-	private String getDataRest() { return dataRestituzioneField.getText(); }
+	private Date getDataRest() throws InvalidInputException {
+	    try {
+	        LocalDate data = LocalDate.parse(dataRestituzioneField.getText(), DateTimeFormatter.ISO_LOCAL_DATE);
+	        return Date.valueOf(data);
+	    } catch (DateTimeParseException e) {
+	        throw new InvalidInputException("Formato data restituzione non valido. Usa YYYY-MM-DD.");
+	    }
+	}
+
 	private String getIdVenditaRest() { return idVenditaRestField.getText(); }
     
     private void creaPannelloRestituzione() {
@@ -159,7 +176,7 @@ public class GestisciVendite extends JPanel {
         pannelloRestituzione.add(new JLabel("ID Vendita (solo cifre):"), cc.xy(1,3));
         pannelloRestituzione.add(idVenditaRestField, cc.xy(3,3));
         
-        pannelloRestituzione.add(restituzioneButton, cc.xy(1,5));
+        pannelloRestituzione.add(restituzioneButton, cc.xy(3,5));
         
         restituzioneButton.addActionListener(e -> {
             try {

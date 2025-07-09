@@ -1,17 +1,17 @@
 package gui;
 
-import com.jgoodies.forms.layout.*;
 import javax.swing.*;
 
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.GridLayout;
 
 import Principale.*;
+import controller.ProcessQueryMostraDati;
 
 public class VisualizzaDati extends JPanel{
 
@@ -33,40 +33,46 @@ public class VisualizzaDati extends JPanel{
     
     private MainProcess mainProcess;
     
-    public VisualizzaDati(MainProcess main) {
+    public VisualizzaDati(MainProcess main){
     	
     	this.mainProcess = main;
     	
 
-        tabbedPane = new JTabbedPane();
+    	tabbedPane = new JTabbedPane();
 
-        veicoli = new JPanel();
-        clienti = new JPanel();
-        vendite = new JPanel();
-        magazzini = new JPanel();
-        club = new JPanel();
-        
-        
-        tabbedPane.addTab("Veicoli", creaScrollPanePerPanel(veicoli));
-        tabbedPane.addTab("Clienti", creaScrollPanePerPanel(clienti));
-        tabbedPane.addTab("Vendite", creaScrollPanePerPanel(vendite));
-        tabbedPane.addTab("Magazzini", creaScrollPanePerPanel(magazzini));
-        tabbedPane.addTab("Club", creaScrollPanePerPanel(club));
-        
-        backButton = new JButton("back");
+    	veicoli = new JPanel();
+    	clienti = new JPanel();
+    	vendite = new JPanel();
+    	magazzini = new JPanel();
+    	club = new JPanel();
 
-        setLayout(new BorderLayout());
-        add(tabbedPane, BorderLayout.CENTER);
-        add(backButton, BorderLayout.SOUTH);
-        
-        backButton.addActionListener(backPressed());
-        
-        populateData();
+    	tabbedPane.addTab("Veicoli", creaScrollPanePerPanel(veicoli));
+    	tabbedPane.addTab("Clienti", creaScrollPanePerPanel(clienti));
+    	tabbedPane.addTab("Vendite", creaScrollPanePerPanel(vendite));
+    	tabbedPane.addTab("Magazzini", creaScrollPanePerPanel(magazzini));
+    	tabbedPane.addTab("Club", creaScrollPanePerPanel(club));
+
+    	JButton aggiornaButton = new JButton("Aggiorna");
+    	aggiornaButton.addActionListener(e -> populateData());
+
+    	JPanel topPanel = new JPanel(new BorderLayout());
+    	topPanel.add(aggiornaButton, BorderLayout.EAST);
+
+    	backButton = new JButton("Back");
+
+    	setLayout(new BorderLayout());
+    	add(topPanel, BorderLayout.NORTH);
+    	add(tabbedPane, BorderLayout.CENTER);
+    	add(backButton, BorderLayout.SOUTH);
+
+    	backButton.addActionListener(backPressed());
+
+    	populateData();
         
     }
     
     
-    //Funzione helper per semplificare legibilita codice
+    //Funzione helper per semplificare leggibilita codice
     private JScrollPane creaScrollPanePerPanel(JPanel panel) {
         JScrollPane scrollPane = new JScrollPane(panel,
             JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
@@ -75,44 +81,40 @@ public class VisualizzaDati extends JPanel{
         return scrollPane;
     }
     
-    public void populateData() {
-        // Dati esempio, da sostituire con query
-    	datiVeicoli = new ArrayList<>();
-    	datiVeicoli.add(new String[] {"NumeroTelaio", "Marca", "Modello", "Colore", "Prezzo", "isVenduto", "Tipo", "Numero_Porte", "Tipologia_Cambio", "Numero_Airbag", "Altezza_Seggiolino", "Id_magazzino"});
-    	datiVeicoli.add(new String[] {
-    	    "ABC123", "Fiat", "Panda", "Rosso", "10000", "false", "Utilitaria", "5", "Manuale", "4", "50", "1",
-    	    "XYZ789", "Nissan", "Qashqai", "Blu", "18000", "true", "SUV", "5", "Automatico", "6", "60", "2"
-    	});
+    public void populateData(){
     	
-        datiClienti = new ArrayList<>();
-        datiClienti.add(new String[] {"Id_cliente", "Nome", "Cognome", "Email", "Numero_di_telefono", "Comune", "Num_civico", "Indirizzo", "Data_iscrizione", "Data_scadenza", "Id_club"});
-        datiClienti.add(new String[] {
-            "1", "Mario", "Rossi", "mario.rossi@email.it", "3331234567", "Roma", "12", "Via Roma 12", "2023-01-01", "2024-01-01", "1",
-            "2", "Luca", "Bianchi", "luca.bianchi@email.it", "3459876543", "Milano", "7", "Corso Milano 7", "2022-06-15", "2023-06-15", "2"
-        });
+		try {
+			datiVeicoli = new ArrayList<>();
+			ArrayList<String[]> dataVeic = ProcessQueryMostraDati.eseguiQueryView("veicolo");
+			datiVeicoli.add(dataVeic.get(0)); //intestazioni colonne
+			datiVeicoli.add(dataVeic.get(1)); //dati effettivi
+			
+			datiClienti = new ArrayList<>();
+			ArrayList<String[]> dataCli = ProcessQueryMostraDati.eseguiQueryView("clienti");
+	        datiClienti.add(dataCli.get(0));
+	        datiClienti.add(dataCli.get(1));
 
-        datiClub = new ArrayList<>();
-        datiClub.add(new String[] {"Id_club", "Nome_club", "Percentuale_di_sconto"});
-        datiClub.add(new String[] {
-            "1", "Oro", "30%",
-            "2", "Argento", "10%"
-        });
+	        datiClub = new ArrayList<>();
+	        ArrayList<String[]> dataClu = ProcessQueryMostraDati.eseguiQueryView("club");
+	        datiClub.add(dataClu.get(0));
+	        datiClub.add(dataClu.get(1));
 
-        datiVendite = new ArrayList<>();
-        datiVendite.add(new String[] {"Id_vendita", "Data_vendita", "Data_restituzione", "Prezzo_Finale", "Numero_telaio", "Id_dipendente", "Id_cliente"});
-        datiVendite.add(new String[] {
-            "10", "2023-03-01", "2023-03-10", "12000", "ABC123", "3", "1",
-            "11", "2023-04-05", "2023-04-15", "15000", "XYZ789", "2", "2"
-        });
+	        datiVendite = new ArrayList<>();
+	        ArrayList<String[]> dataVen = ProcessQueryMostraDati.eseguiQueryView("vendite");
+	        datiVendite.add(dataVen.get(0));
+	        datiVendite.add(dataVen.get(1));
 
-        datiMagazzini = new ArrayList<>();
-        datiMagazzini.add(new String[] {"Id_magazzino", "Indirizzo"});
-        datiMagazzini.add(new String[] {
-            "1", "Via Roma 10",
-            "2", "Corso Milano 15",
-            "3", "Viale Magellano 14",
-            "4", "Corso Malta 3"
-        });
+	        datiMagazzini = new ArrayList<>();
+	        ArrayList<String[]> dataMag = ProcessQueryMostraDati.eseguiQueryView("magazzini");
+	        datiMagazzini.add(dataMag.get(0));
+	        datiMagazzini.add(dataMag.get(1));
+			
+		} catch (SQLException e) {
+			
+        	JOptionPane.showMessageDialog(this, "Errore nella visualizzazione dei dati, riprova.");
+        	
+		}
+        
         
         popolaPanelConDati(veicoli, datiVeicoli);
         popolaPanelConDati(clienti, datiClienti);

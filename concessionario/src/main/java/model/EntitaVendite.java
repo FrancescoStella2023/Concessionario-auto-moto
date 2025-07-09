@@ -1,12 +1,14 @@
 package model;
 
+import java.sql.Date;
+
 public class EntitaVendite {
-	private String dataVendita;
+	private Date dataVendita;
 	private int idDipendente;
 	private int idCliente;
 	private int numeroTelaio;
 	
-	public EntitaVendite(String dataVendita, int idDipendente, int idCliente, int numeroTelaio) {
+	public EntitaVendite(Date dataVendita, int idDipendente, int idCliente, int numeroTelaio) {
 		this.dataVendita = dataVendita;
 		this.idCliente = idCliente;
 		this.numeroTelaio = numeroTelaio;
@@ -25,7 +27,7 @@ public class EntitaVendite {
 		return idDipendente;
 	}
 
-	public String getDataVendita() {
+	public Date getDataVendita() {
 		return dataVendita;
 	}
 	

@@ -44,7 +44,7 @@ public class DAOGestioneVeicoli implements DAOVeicoli{
 	}
 	
 	public boolean rimuoviVeicolo(int numeroTelaio) throws SQLException{
-		String sql = "DELETE FROM veicoli where numero_telaio = ?";
+		String sql = "DELETE FROM veicolo where numero_telaio = ?";
 		
 		PreparedStatement ps = conn.prepareStatement(sql);
 		

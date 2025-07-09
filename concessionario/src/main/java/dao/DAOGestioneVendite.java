@@ -1,9 +1,11 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 import controller.InfoDipendenteLogic;
 import dbdao.DAOConnDB;
@@ -14,25 +16,26 @@ public class DAOGestioneVendite implements DAOVendite{
 	private Connection conn = new DAOConnDB().getConn();
 	
 	public void aggiungiVendita(EntitaVendite vendita) throws SQLException{
-		String sql = "INSERT INTO vendite(v_id_dipendente, v_numero_telaio, v_id_cliente) values(?, ?, ?)";
+		String sql = "INSERT INTO vendite(data_vendita, v_id_dipendente, v_numero_telaio, v_id_cliente) values(?, ?, ?, ?)";
 		
 		PreparedStatement ps = conn.prepareStatement(sql);
-		
-		ps.setInt(1, InfoDipendenteLogic.getIdDipendente());
-		ps.setInt(2, vendita.getNumeroTelaio()); //riempie i '?'
-		ps.setInt(3, vendita.getIdCliente()); 
+			 
+		ps.setDate(1, vendita.getDataVendita()); //riempie i ?
+		ps.setInt(2, InfoDipendenteLogic.getIdDipendente());
+		ps.setInt(3, vendita.getNumeroTelaio()); 
+		ps.setInt(4, vendita.getIdCliente()); 
 		
 		ps.execute();
 		
 		ps.close();//rilascia la risorsa
 	}
 	
-	public boolean effettuaRestituzione(String dataRestituzione, int idVendita) throws SQLException{
-		String sql = "UPDATE vendite set data_restituzione = '?' WHERE id_vendita = ?";
+	public boolean effettuaRestituzione(Date dataRestituzione, int idVendita) throws SQLException{
+		String sql = "UPDATE vendite set data_restituzione = CAST(? AS DATE) WHERE id_vendita = ?";
 		
 		PreparedStatement ps = conn.prepareStatement(sql);
 		
-		ps.setString(1, dataRestituzione); //riempie i '?'
+		ps.setDate(1, dataRestituzione); //riempie i '?'
 		ps.setInt(2,  idVendita);
 		
 		int righeModificate = ps.executeUpdate();

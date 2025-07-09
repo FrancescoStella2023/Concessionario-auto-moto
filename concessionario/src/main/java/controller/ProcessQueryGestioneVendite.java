@@ -1,5 +1,6 @@
 package controller;
 
+import java.sql.Date;
 import java.sql.SQLException;
 
 import dao.DAOGestioneVeicoli;
@@ -8,7 +9,7 @@ import exceptions.InvalidInputException;
 import model.EntitaVendite;
 
 public class ProcessQueryGestioneVendite {
-	public static void eseguiQueryVendita(String dataVendita, String numeroTelaio, String idCliente) throws InvalidInputException{
+	public static void eseguiQueryVendita(Date dataVendita, String numeroTelaio, String idCliente) throws InvalidInputException{
 
 		DAOGestioneVendite daoVen = new DAOGestioneVendite();
 		
@@ -22,26 +23,26 @@ public class ProcessQueryGestioneVendite {
 				EntitaVendite vendita = new EntitaVendite(dataVendita, idDipendente, idCliInt, numTelaioInt);
 				daoVen.aggiungiVendita(vendita);
 			}
-			else throw new InvalidInputException("Dati inseriti non validi, riprova.");//altrimenti lancia l'eccezione
+			else throw new InvalidInputException("Campi vuoti o non validi, riprova., riprova.");//altrimenti lancia l'eccezione
 		}
 		catch(SQLException ex) {//gestisce gli errori lanciati dal db
 			switch(ex.getSQLState()) {
-			case "P0001":
-				throw new InvalidInputException("Veicolo già venduto o restituito una volta, riprova.");
-			case "22008":
-				throw new InvalidInputException("Data non valida.");
-			case "23503":
-				ex.printStackTrace();
-				throw new InvalidInputException("Numero veicolo o cliente inesistenti, riprova.");
-			default:
-				ex.printStackTrace();
-				throw new InvalidInputException("Errore del sistema, riprova.");
+				case "P0001":
+					throw new InvalidInputException("Veicolo già venduto o restituito una volta, riprova.");
+				case "22008":
+					throw new InvalidInputException("Data non valida.");
+				case "23503":
+					ex.printStackTrace();
+					throw new InvalidInputException("Numero veicolo o cliente inesistenti, riprova.");
+				default:
+					ex.printStackTrace();
+					throw new InvalidInputException("Errore del sistema, riprova.");
 			}
 		}
 	}
 	
 	
-	public static void eseguiQueryRestituzione(String dataRestituzione, String idVendita) throws InvalidInputException{
+	public static void eseguiQueryRestituzione(Date dataRestituzione, String idVendita) throws InvalidInputException{
 		DAOGestioneVendite daoVen = new DAOGestioneVendite();
 		
 		try {
@@ -53,12 +54,14 @@ public class ProcessQueryGestioneVendite {
 					throw new InvalidInputException("Id della vendita inesistente, riprova.");
 				}
 			}
-			else throw new InvalidInputException("Id della vendita non valido, riprova.");
+			else throw new InvalidInputException("Campi vuoti o non validi, riprova.");
 		}
 		catch(SQLException ex) {//gestisce gli errori lanciati dal db
 			switch(ex.getSQLState()) {
-				case "22001": //finire TODO
-					throw new InvalidInputException("I dati inseriti superano il limite massimo di caratteri, riprova.");
+				case "22007":
+					throw new InvalidInputException("Data non valida.");
+				case "P0001":
+					throw new InvalidInputException("Veicolo già restituito, data di restituzione maggiore di 14 giorni dopo la vendita o data minore della data di vendita, riprova.");
 				default:
 					throw new InvalidInputException("Errore del sistema, riprova.");
 			}

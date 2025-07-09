@@ -12,8 +12,14 @@ public class ProcessQueryGestioneMagazzini {
 		DAOGestioneMagazzini daoMag = new DAOGestioneMagazzini();
 		
 		try {
-				EntitaMagazzino magazzino = new EntitaMagazzino(indirizzo);
-				daoMag.aggiungiMagazzino(magazzino);
+				if(ApplicationBusinessLogic.isAllString(indirizzo)) {
+					
+					EntitaMagazzino magazzino = new EntitaMagazzino(indirizzo);
+					daoMag.aggiungiMagazzino(magazzino);
+				}
+				else {
+					throw new InvalidInputException("Campi vuoti o non validi, riprova., riprova");
+				}
 		}
 		catch(SQLException ex) {//gestisce gli errori lanciati dal db
 			

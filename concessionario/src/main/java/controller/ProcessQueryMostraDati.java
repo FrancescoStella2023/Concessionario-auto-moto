@@ -37,7 +37,6 @@ public class ProcessQueryMostraDati {
 	    risultato.add(intestazioni);
 	    risultato.add(arrayValori);
 
-	    rs.close();
 	    return risultato;
 	}
 

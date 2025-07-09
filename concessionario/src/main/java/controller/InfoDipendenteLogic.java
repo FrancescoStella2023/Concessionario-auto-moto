@@ -8,7 +8,6 @@ public class InfoDipendenteLogic {
 	public static void setPrivilegeAndIdDipendente(int idDip, boolean isAdm) {
 		idDipendente = idDip;
 		isAdmin = isAdm;
-		System.out.println(idDipendente);
 	}
 
 	public static int getIdDipendente() {

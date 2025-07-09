@@ -18,18 +18,23 @@ public class ProcessQueryGestioneClub {
 					EntitaClub club = new EntitaClub(nomeClub, percScontoInt);
 					daoClub.aggiungiClub(club);
 				}
-				else throw new InvalidInputException("Nome club o percentuale di sconto non validi, riprova."); //altrimenti lancia l'eccezione
+				else throw new InvalidInputException("Campi vuoti o non validi, riprova., riprova."); //altrimenti lancia l'eccezione
 				
 		}
 		catch(SQLException ex) { //gestisce gli errori lanciati dal db
 			
 			switch(ex.getSQLState()) {
-			case "23503":
-				throw new InvalidInputException("Percentuale di sconto non compresa tra 1 e 50, riprova.");
-			case "22001":
-				throw new InvalidInputException("I dati inseriti superano il limite massimo di caratteri, riprova.");
-			default:
-				throw new InvalidInputException("Errore del sistema, riprova.");
+				case "23503":
+					throw new InvalidInputException("Percentuale di sconto non compresa tra 1 e 50, riprova.");
+				case "23514":
+					throw new InvalidInputException("Percentuale di sconto non compresa tra 1 e 50, riprova.");
+				case "22001":
+					throw new InvalidInputException("I dati inseriti superano il limite massimo di caratteri, riprova.");
+				default:
+					System.out.println(ex.getSQLState());
+					throw new InvalidInputException("Errore del sistema, riprova.");
+					
+
 			}
 		}
 	}

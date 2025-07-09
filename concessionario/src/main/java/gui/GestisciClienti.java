@@ -5,6 +5,7 @@ import javax.swing.*;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import Principale.*;
 import controller.ProcessQueryGestioneClienti;
@@ -33,7 +34,12 @@ public class GestisciClienti extends JPanel {
             "right:pref, 4dlu, 150dlu",
             "pref, 4dlu, pref, 4dlu, pref, 4dlu, pref, 4dlu, pref, 4dlu, pref, 4dlu, pref, 4dlu, pref, 4dlu, pref"
         );
-        setLayout(layout);
+		JTabbedPane tabbedPane = new JTabbedPane();
+		JPanel formPanel = new JPanel(layout);
+		setLayout(new BorderLayout());
+		add(tabbedPane, BorderLayout.CENTER);
+		tabbedPane.addTab("Aggiungi clienti", formPanel);
+
 
         nomeField = new JTextField();
         cognomeField = new JTextField();
@@ -50,34 +56,34 @@ public class GestisciClienti extends JPanel {
         
         CellConstraints cc = new CellConstraints();
 
-        add(new JLabel("Nome (solo caratteri):"), cc.xy(1, 1));
-        add(nomeField, cc.xy(3, 1));
+        formPanel.add(new JLabel("Nome (solo caratteri):"), cc.xy(1, 1));
+        formPanel.add(nomeField, cc.xy(3, 1));
 
-        add(new JLabel("Cognome (solo caratteri):"), cc.xy(1, 3));
-        add(cognomeField, cc.xy(3, 3));
+        formPanel.add(new JLabel("Cognome (solo caratteri):"), cc.xy(1, 3));
+        formPanel.add(cognomeField, cc.xy(3, 3));
 
-        add(new JLabel("Email (almeno una @):"), cc.xy(1, 5));
-        add(emailField, cc.xy(3, 5));
+        formPanel.add(new JLabel("Email (almeno una @):"), cc.xy(1, 5));
+        formPanel.add(emailField, cc.xy(3, 5));
 
-        add(new JLabel("Telefono (solo cifre):"), cc.xy(1, 7));
-        add(numeroTelefonoField, cc.xy(3, 7));
+        formPanel.add(new JLabel("Telefono (solo cifre):"), cc.xy(1, 7));
+        formPanel.add(numeroTelefonoField, cc.xy(3, 7));
 
-        add(new JLabel("Comune (solo caratteri):"), cc.xy(1, 9));
-        add(comuneField, cc.xy(3, 9));
+        formPanel.add(new JLabel("Comune (solo caratteri):"), cc.xy(1, 9));
+        formPanel.add(comuneField, cc.xy(3, 9));
 
-        add(new JLabel("Num. Civico (solo cifre):"), cc.xy(1, 11));
-        add(numCivicoField, cc.xy(3, 11));
+        formPanel.add(new JLabel("Num. Civico (solo cifre):"), cc.xy(1, 11));
+        formPanel.add(numCivicoField, cc.xy(3, 11));
 
-        add(new JLabel("Indirizzo (solo caratteri):"), cc.xy(1, 13));
-        add(indirizzoField, cc.xy(3, 13));
+        formPanel.add(new JLabel("Indirizzo (solo caratteri):"), cc.xy(1, 13));
+        formPanel.add(indirizzoField, cc.xy(3, 13));
 
-        add(new JLabel("ID Club (solo cifre, 0 nessun club):"), cc.xy(1, 15));
-        add(idClubField, cc.xy(3, 15));
+        formPanel.add(new JLabel("ID Club (solo cifre, 0 nessun club):"), cc.xy(1, 15));
+        formPanel.add(idClubField, cc.xy(3, 15));
 		
 		
 		Dimension buttonSize = new Dimension(220, 25);
 	    enterButton.setPreferredSize(buttonSize);
-        add(enterButton, cc.xy(3, 17));
+	    formPanel.add(enterButton, cc.xy(3, 17));
         
         
         
@@ -86,13 +92,15 @@ public class GestisciClienti extends JPanel {
 				
 				ProcessQueryGestioneClienti.eseguiQueryNewCliente(getNome(), getCognome(), getEmail(), getNumeroTelefono(), getComune(), getNumCivico(), getIndirizzo(), getIdClub());
 				JOptionPane.showMessageDialog(this, "Cliente inserito con successo.");
+				mainProcess.showPanel("Mostra funzioni"); //ritorna al menu
+
 			}
 			catch(InvalidInputException ex) {
 				ex.showErrorDialogPanel(this);
 			}
 		});
 		
-		add(backButton, cc.xy(1,17));
+		add(backButton, BorderLayout.SOUTH);
 		backButton.addActionListener(backPressed());
 	}
 	
