@@ -18,7 +18,7 @@ public class ProcessQueryGestioneClub {
 					EntitaClub club = new EntitaClub(nomeClub, percScontoInt);
 					daoClub.aggiungiClub(club);
 				}
-				else throw new InvalidInputException("Campi vuoti o non validi, riprova., riprova."); //altrimenti lancia l'eccezione
+				else throw new InvalidInputException("Campi vuoti o non validi, riprova."); //altrimenti lancia l'eccezione
 				
 		}
 		catch(SQLException ex) { //gestisce gli errori lanciati dal db

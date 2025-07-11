@@ -18,7 +18,7 @@ public class ProcessQueryGestioneMagazzini {
 					daoMag.aggiungiMagazzino(magazzino);
 				}
 				else {
-					throw new InvalidInputException("Campi vuoti o non validi, riprova., riprova");
+					throw new InvalidInputException("Campi vuoti o non validi, riprova");
 				}
 		}
 		catch(SQLException ex) {//gestisce gli errori lanciati dal db
