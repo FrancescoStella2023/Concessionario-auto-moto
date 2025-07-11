@@ -203,7 +203,7 @@ public class GestisciVeicoli extends JPanel{
     }
     
     
-    private void aggiornaCampiTipo(String tipo) {
+    private void aggiornaCampiTipo(String tipo) { //per settare da soli i campi a 0 in caso sia auto o moto
 		tipoField.setText(tipo);
 		boolean isAuto = tipo.equals("a");//Vero se è un auto
 		

@@ -72,7 +72,7 @@ public class VisualizzaDati extends JPanel{
     }
     
     
-    //Funzione helper per semplificare leggibilita codice
+    //Funzione helper per semplificare leggibilita codice, crea una porzione nel panel per poter abilitare la barra dell'overflow
     private JScrollPane creaScrollPanePerPanel(JPanel panel) {
         JScrollPane scrollPane = new JScrollPane(panel,
             JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,

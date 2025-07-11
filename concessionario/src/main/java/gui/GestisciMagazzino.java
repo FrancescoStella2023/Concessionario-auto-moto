@@ -47,6 +47,8 @@ public class GestisciMagazzino extends JPanel {
 		enterButton.addActionListener(e -> {
 			try {
 				ProcessQueryGestioneMagazzini.eseguiQueryMagazzino(getIndirizzo());
+				JOptionPane.showMessageDialog(this, "Maggazzino inserito con successo.");
+				
 			} catch (InvalidInputException ex) {
 				ex.showErrorDialogPanel(this);
 			}

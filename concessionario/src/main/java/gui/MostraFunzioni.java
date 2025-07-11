@@ -26,7 +26,7 @@ public class MostraFunzioni extends JPanel {
 		
 		this.mainProcess = main;//Accesso al mainProcess per chiamare showPanel
 		
-		mainProcess.getFrame().setTitle("Gestore Concessionario - " + "id dipendente: " + InfoDipendenteLogic.getIdDipendente() + " - privilegi admin: " + InfoDipendenteLogic.isAdmin());
+		mainProcess.getFrame().setTitle("Gestore Concessionario");
 		
 		//Set up grafica interfaccia
 		FormLayout layout = new FormLayout(
@@ -81,7 +81,7 @@ public class MostraFunzioni extends JPanel {
 	
 	
 	public void AggiornaBottoni() {
-		if (InfoDipendenteLogic.isAdmin()) {
+		if (InfoDipendenteLogic.getPrivilege()) {
 			CellConstraints cc = new CellConstraints();
 			add(gestisciMagazzinoButton, cc.xy(2, 11));
 			add(gestisciDipendentiButton, cc.xy(2, 13));

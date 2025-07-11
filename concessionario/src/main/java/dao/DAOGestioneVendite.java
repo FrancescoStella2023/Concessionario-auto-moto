@@ -27,7 +27,6 @@ public class DAOGestioneVendite implements DAOVendite{
 		
 		ps.execute();
 		
-		ps.close();//rilascia la risorsa
 	}
 	
 	public boolean effettuaRestituzione(Date dataRestituzione, int idVendita) throws SQLException{
@@ -40,7 +39,6 @@ public class DAOGestioneVendite implements DAOVendite{
 		
 		int righeModificate = ps.executeUpdate();
 		
-		ps.close();//rilascia la risorsa
 		
 		if(righeModificate == 0) return false;
 		else return true;
@@ -57,8 +55,10 @@ public class DAOGestioneVendite implements DAOVendite{
 		
 		ResultSet rs = ps.executeQuery();
 		
-		rs.next();
-		return rs.getInt(1);
+		
+		
+		if(rs.next()) return rs.getInt(1);
+		else return 0;
 		
 	}
 }

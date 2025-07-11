@@ -21,7 +21,7 @@ public class ProcessQueryGestioneClienti {
 				int numCivicoInt = Integer.parseInt(numCivicoC);
 				int idClubInt = Integer.parseInt(idClubC);
 				
-				if(!daoCli.checkClubCliente(idClubInt)) throw new InvalidInputException("Club inesistente, riprova.");
+				if(!daoCli.checkClubCliente(idClubInt) && idClubInt != 0) throw new InvalidInputException("Club inesistente, riprova.");
 				
 				EntitaCliente cliente = new EntitaCliente(nomeC, cognomeC, emailC, numeroTelefonoC, comuneC, numCivicoInt, indirizzoC, idClubInt);
 				

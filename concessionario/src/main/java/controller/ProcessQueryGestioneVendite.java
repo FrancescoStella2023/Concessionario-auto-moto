@@ -85,10 +85,10 @@ public class ProcessQueryGestioneVendite {
 		catch(SQLException ex) {//gestisce gli errori lanciati dal db
 			switch(ex.getSQLState()) {
 				case "24000":
-					throw new InvalidInputException("Cliente inesistente, riprova.");
-				default:
 					ex.printStackTrace();
 					System.out.println(ex.getSQLState());
+					throw new InvalidInputException("Cliente inesistente, riprova.");
+				default:
 					throw new InvalidInputException("Errore del sistema, riprova.");
 			}
 		}

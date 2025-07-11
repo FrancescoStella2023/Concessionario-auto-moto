@@ -12,7 +12,7 @@ public class ProcessQueryGestioneMagazzini {
 		DAOGestioneMagazzini daoMag = new DAOGestioneMagazzini();
 		
 		try {
-				if(ApplicationBusinessLogic.isAllString(indirizzo)) {
+				if(!indirizzo.equals("") && !ApplicationBusinessLogic.isAllInt(indirizzo)){
 					
 					EntitaMagazzino magazzino = new EntitaMagazzino(indirizzo);
 					daoMag.aggiungiMagazzino(magazzino);

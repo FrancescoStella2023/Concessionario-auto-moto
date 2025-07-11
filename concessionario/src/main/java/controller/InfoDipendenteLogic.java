@@ -14,7 +14,7 @@ public class InfoDipendenteLogic {
 		return idDipendente;
 	}
 
-	public static boolean isAdmin() {
+	public static boolean getPrivilege() {
 		
 		return isAdmin;
 	}

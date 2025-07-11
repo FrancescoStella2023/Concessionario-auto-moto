@@ -43,7 +43,7 @@ public class GestisciDipendenti extends JPanel{
 
     private JTabbedPane tabbedPane;
     
-    MainProcess mainProcess;
+    private MainProcess mainProcess;
     
     public GestisciDipendenti(MainProcess main) {
     	
@@ -71,7 +71,7 @@ public class GestisciDipendenti extends JPanel{
         populateData();
     }
     
-    public void populateData(){
+    private void populateData(){
 		try {
 			datiDipendenti = new ArrayList<>();
 			ArrayList<String[]> dataDip = ProcessQueryMostraDati.eseguiQueryView("dipendenti");

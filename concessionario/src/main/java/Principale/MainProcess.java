@@ -41,6 +41,7 @@ public class MainProcess {
 		GestisciVendite venditePanel = new GestisciVendite(this);
 		VisualizzaDati datiPanel = new VisualizzaDati(this);
 		
+		//aggiunge tutti i card panel
 		cardPanel.add(loginPanel, "Login");
 		cardPanel.add(funzioniPanel, "Mostra funzioni");
 		cardPanel.add(clientiPanel, "Gestisci clienti");
@@ -82,7 +83,7 @@ public class MainProcess {
 			ex.printStackTrace();
 		}
 		
-		SwingUtilities.invokeLater(() -> new MainProcess());
+		SwingUtilities.invokeLater(() -> new MainProcess()); //garantisce che la gui venga inizializzata nel thread corretto
 		
 	}
 	
