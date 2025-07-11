@@ -15,7 +15,16 @@ public class MainProcess {
 	private JFrame frame;
 	private JPanel cardPanel;
 	private CardLayout cardLayout;
+	private LoginUtente loginPanel;
+	
 	private MostraFunzioni funzioniPanel;
+	private GestisciClienti clientiPanel;
+	private GestisciClub clubPanel;
+	private GestisciDipendenti dipendentiPanel;
+	private GestisciMagazzino magazzinoPanel;
+	private GestisciVeicoli veicoliPanel;
+	private GestisciVendite venditePanel;
+	private VisualizzaDati datiPanel;
 	
 	
 	public MainProcess() {
@@ -31,15 +40,15 @@ public class MainProcess {
 		
 		
 		//Inizializza e aggiungi al cardPanel le diverse schede
-		LoginUtente loginPanel = new LoginUtente(this);
+		loginPanel = new LoginUtente(this);
 		funzioniPanel = new MostraFunzioni(this);
-		GestisciClienti clientiPanel = new GestisciClienti(this);
-		GestisciClub clubPanel = new GestisciClub(this);
-		GestisciDipendenti dipendentiPanel = new GestisciDipendenti(this);
-		GestisciMagazzino magazzinoPanel = new GestisciMagazzino(this);
-		GestisciVeicoli veicoliPanel = new GestisciVeicoli(this);
-		GestisciVendite venditePanel = new GestisciVendite(this);
-		VisualizzaDati datiPanel = new VisualizzaDati(this);
+		clientiPanel = new GestisciClienti(this);
+		clubPanel = new GestisciClub(this);
+		dipendentiPanel = new GestisciDipendenti(this);
+		magazzinoPanel = new GestisciMagazzino(this);
+		veicoliPanel = new GestisciVeicoli(this);
+		venditePanel = new GestisciVendite(this);
+		datiPanel = new VisualizzaDati(this);
 		
 		//aggiunge tutti i card panel
 		cardPanel.add(loginPanel, "Login");
@@ -63,6 +72,12 @@ public class MainProcess {
 	
 	public void showPanel(String name) {//Funzione che permette di cambiare scheda
 		cardLayout.show(cardPanel, name);
+		clientiPanel.clear();
+		clubPanel.clear();
+		dipendentiPanel.clear();
+		magazzinoPanel.clear();
+		veicoliPanel.clear();
+		venditePanel.clear();
 	}
 	
 	

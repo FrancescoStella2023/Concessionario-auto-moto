@@ -7,6 +7,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.Dimension;
+
 import Principale.*;
 import controller.ProcessQueryGestioneClienti;
 import controller.ProcessQueryGestioneClub;
@@ -26,8 +28,8 @@ public class GestisciClub extends JPanel{
 		this.mainProcess = main;
 		
 		FormLayout layout = new FormLayout(
-				"right:pref, 4dlu, 100dlu",
-				"pref, 4dlu, pref, 4dlu, pref"
+				"default:grow, right:pref, 4dlu, 100dlu, default:grow",
+				"50dlu, pref, 4dlu, pref, 4dlu, pref"
 		);
 		JTabbedPane tabbedPane = new JTabbedPane();
 		JPanel formPanel = new JPanel(layout);
@@ -42,16 +44,19 @@ public class GestisciClub extends JPanel{
 		enterButton = new JButton("Enter");
 		backButton = new JButton("Back");
 		
+		Dimension buttonSize = new Dimension(220, 25);
+	    enterButton.setPreferredSize(buttonSize);
+		
 		CellConstraints cc = new CellConstraints();
 		
-		formPanel.add(new JLabel("Nome club:"), cc.xy(1,1));
-		formPanel.add(nomeClubField, cc.xy(3,1));
+		formPanel.add(new JLabel("Nome club:"), cc.xy(2,2));
+		formPanel.add(nomeClubField, cc.xy(4,2));
 		
-		formPanel.add(new JLabel("Percentuale di sconto:"), cc.xy(1,3));
-		formPanel.add(percentualeDiScontoField, cc.xy(3,3));
+		formPanel.add(new JLabel("Percentuale di sconto:"), cc.xy(2,4));
+		formPanel.add(percentualeDiScontoField, cc.xy(4,4));
 		
 		
-		formPanel.add(enterButton, cc.xy(3, 5));
+		formPanel.add(enterButton, cc.xy(4, 6));
 		enterButton.addActionListener(e ->{
 			try {
 				ProcessQueryGestioneClub.eseguiQueryClub(getNome(), getPercentualeDiSconto());
@@ -83,4 +88,9 @@ public class GestisciClub extends JPanel{
             }
         };
 	}
+	
+	public void clear() {
+        nomeClubField.setText(null);
+		percentualeDiScontoField.setText(null);
+    }
 }

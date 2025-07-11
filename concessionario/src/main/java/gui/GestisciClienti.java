@@ -135,5 +135,15 @@ public class GestisciClienti extends JPanel {
         };
 	}
 	
+	public void clear() {
+        nomeField.setText(null);
+    	cognomeField.setText(null);
+		emailField.setText(null);
+    	numeroTelefonoField.setText(null);
+    	comuneField.setText(null);
+    	numCivicoField.setText(null);
+    	indirizzoField.setText(null);
+    	idClubField.setText(null);
+    }
 }
 

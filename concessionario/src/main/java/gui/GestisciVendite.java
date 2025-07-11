@@ -107,6 +107,8 @@ public class GestisciVendite extends JPanel {
         pannelloVendita.add(new JLabel("Numero Telaio (solo cifre):"), cc.xy(1,5));
         pannelloVendita.add(numeroTelaioField, cc.xy(3,5));
         
+        //Dimension buttonSize = new Dimension(225, 50);
+        //alcolaPrezzoFinaleButton.setPreferredSize(buttonSize);
         pannelloVendita.add(calcolaPrezzoFinaleButton, cc.xy(3,7));
         pannelloVendita.add(new JLabel("Visualizza prezzo finale:"), cc.xy(1,9));
         pannelloVendita.add(prezzoFinaleLabel, cc.xy(3,9));
@@ -127,6 +129,7 @@ public class GestisciVendite extends JPanel {
             try {
             	ProcessQueryGestioneVendite.eseguiQueryVendita(getDataVendita(), getNumeroTelaio(), getIdCliente());
             	JOptionPane.showMessageDialog(this, "Vendita inserita con successo.");
+    	        clear();
             }
             catch(InvalidInputException ex) {
             	ex.showErrorDialogPanel(this);
@@ -169,6 +172,8 @@ public class GestisciVendite extends JPanel {
         dataRestituzioneField = new JFormattedTextField();
         idVenditaRestField = new JTextField();
         restituzioneButton = new JButton("Restituisci veicolo");
+        Dimension buttonSize = new Dimension(220, 25);
+	    restituzioneButton.setPreferredSize(buttonSize);
         
         pannelloRestituzione.add(new JLabel("Data Restituzione (YYYY-MM-DD):"), cc.xy(1,1));
         pannelloRestituzione.add(dataRestituzioneField, cc.xy(3,1));
@@ -182,6 +187,7 @@ public class GestisciVendite extends JPanel {
             try {
             	ProcessQueryGestioneVendite.eseguiQueryRestituzione(getDataRest(), getIdVenditaRest());
             	JOptionPane.showMessageDialog(this, "Restituzione effettuata con successo.");
+    	        clear();
             }
             catch(InvalidInputException ex) {
             	ex.showErrorDialogPanel(this);
@@ -197,4 +203,13 @@ public class GestisciVendite extends JPanel {
             }
         };
 	}
+	
+	public void clear() {
+    	dataVenditaField.setText(null);
+    	prezzoFinaleLabel.setText(null);
+    	idClienteEsistenteField.setText(null);
+    	numeroTelaioField.setText(null);
+	    dataRestituzioneField.setText(null);
+    	idVenditaRestField.setText(null);
+    }
 }

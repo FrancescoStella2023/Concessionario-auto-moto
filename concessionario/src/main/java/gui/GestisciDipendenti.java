@@ -188,6 +188,7 @@ public class GestisciDipendenti extends JPanel{
     	        ProcessQueryGestioneDipendenti.eseguiQueryNewDipendente(getNome(), getCognome(), getPassword(), getIsAdmin());
     	        JOptionPane.showMessageDialog(this, "Dipendente aggiunto.");
     	        populateData(); //aggiorna la view
+    	        clear();
     	    } catch (InvalidInputException ex) {
     	        ex.showErrorDialogPanel(this);
     	    }
@@ -201,22 +202,32 @@ public class GestisciDipendenti extends JPanel{
 	public String getPassword() { return passwordField.getText(); }
 	public String getIsAdmin() { return isAdminField.getText(); }
 	
+	
     private void creaPannelloCambiaPassword() {
-        pannelloNewPass = new JPanel(new GridLayout(3, 2, 10, 10));
-
+        pannelloNewPass = new JPanel();
+        
+        FormLayout layout = new FormLayout(
+			"default:grow, left:pref, 10dlu, 150dlu, default:grow",
+			"25dlu, pref, 4dlu, pref, 4dlu, pref, 4dlu"
+		);
+		
+		pannelloNewPass.setLayout(layout);
+		CellConstraints cc = new CellConstraints();
+        
         idDipendenteNewPassField = new JTextField();
         newPasswordField = new JTextField();
 
-        pannelloNewPass.add(new JLabel("ID Dipendente (solo cifre):"));
-        pannelloNewPass.add(idDipendenteNewPassField);
-        pannelloNewPass.add(new JLabel("Nuova Password:"));
-        pannelloNewPass.add(newPasswordField);
+        pannelloNewPass.add(new JLabel("ID Dipendente (solo cifre):"), cc.xy(2,2));
+        pannelloNewPass.add(idDipendenteNewPassField, cc.xy(4,2));
+        pannelloNewPass.add(new JLabel("Nuova Password:"), cc.xy(2,4));
+        pannelloNewPass.add(newPasswordField, cc.xy(4,4));
 
         JButton cambiaPassButton = new JButton("Cambia Password");
         cambiaPassButton.addActionListener(e -> {
             try {
 				ProcessQueryGestioneDipendenti.eseguiQueryCambiaPassword(getIdDipendenteNew(), getPasswordNew());
 				JOptionPane.showMessageDialog(this, "Password aggiornata.");
+    	        clear();
 			} 
             catch (InvalidInputException ex) {
 				ex.showErrorDialogPanel(this);
@@ -224,8 +235,7 @@ public class GestisciDipendenti extends JPanel{
         	
         });
 
-        pannelloNewPass.add(new JLabel());
-        pannelloNewPass.add(cambiaPassButton, 5);
+        pannelloNewPass.add(cambiaPassButton, cc.xy(4,6));
     }
     
     public String getIdDipendenteNew() { return idDipendenteNewPassField.getText(); }
@@ -257,4 +267,13 @@ public class GestisciDipendenti extends JPanel{
             }
         };
 	}
+	
+	public void clear() {
+		idDipendenteNewPassField.setText(null);
+		newPasswordField.setText(null);
+    	nomeField.setText(null);
+    	cognomeField.setText(null);
+    	passwordField.setText(null);
+    	isAdminField.setText(null);
+    }
 }

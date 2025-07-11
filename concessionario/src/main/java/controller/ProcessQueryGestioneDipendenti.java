@@ -29,7 +29,7 @@ public class ProcessQueryGestioneDipendenti {
 		catch(SQLException ex) {//gestisce gli errori lanciati dal db
 			switch(ex.getSQLState()) {
 				case "23514":
-					throw new InvalidInputException("Password minore di 10 caratteri, riprova.");
+					throw new InvalidInputException("Password minore o uguale di 10 caratteri, riprova.");
 				case "22001":
 					throw new InvalidInputException("I dati inseriti superano il limite massimo di caratteri, riprova.");
 				default:

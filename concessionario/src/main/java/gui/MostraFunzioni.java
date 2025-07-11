@@ -30,7 +30,7 @@ public class MostraFunzioni extends JPanel {
 		
 		//Set up grafica interfaccia
 		FormLayout layout = new FormLayout(
-			"40dlu, left:pref, 50dlu, pref",
+			"default:grow, left:pref, default:grow",
 			"pref, 4dlu, pref, 4dlu, pref, 4dlu, pref, 4dlu, pref, 4dlu, pref, 4dlu, pref, 4dlu, pref"
 		);
 			

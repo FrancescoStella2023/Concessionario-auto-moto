@@ -15,7 +15,7 @@ public class ProcessQueryGestioneVendite {
 		
 		try {
 			
-			if(ApplicationBusinessLogic.isAllInt(numeroTelaio) && ApplicationBusinessLogic.isAllInt(idCliente)) {//verifica se i dati sono validi
+			if(ApplicationBusinessLogic.isAllInt(numeroTelaio) && ApplicationBusinessLogic.isAllInt(idCliente) && daoVen.checkVeicoloIsPresente((int)Long.parseLong(numeroTelaio))) {//verifica se i dati sono validi
 				//in caso positivo processa i dati
 				int numTelaioInt = Integer.parseInt(numeroTelaio);
 				int idDipendente = InfoDipendenteLogic.getIdDipendente();
@@ -23,7 +23,7 @@ public class ProcessQueryGestioneVendite {
 				EntitaVendite vendita = new EntitaVendite(dataVendita, idDipendente, idCliInt, numTelaioInt);
 				daoVen.aggiungiVendita(vendita);
 			}
-			else throw new InvalidInputException("Campi vuoti o non validi, riprova., riprova.");//altrimenti lancia l'eccezione
+			else throw new InvalidInputException("Campi vuoti o non validi, riprova.");//altrimenti lancia l'eccezione
 		}
 		catch(SQLException ex) {//gestisce gli errori lanciati dal db
 			switch(ex.getSQLState()) {
@@ -107,7 +107,7 @@ public class ProcessQueryGestioneVendite {
 		try {
 			if(ApplicationBusinessLogic.isAllInt(numeroTelaio)) {//verifica se i dati sono validi
 				//in caso positivo processa i dati
-				int numTelaioInt = Integer.parseInt(numeroTelaio);
+				int numTelaioInt = (int)Long.parseLong(numeroTelaio);
 				prezzoVeicolo = daoVei.getPrezzoVeicolo(numTelaioInt);
 			}
 			else throw new InvalidInputException("Campi vuoti o non validi, riprova.");//altrimenti lancia l'eccezione

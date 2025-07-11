@@ -61,4 +61,18 @@ public class DAOGestioneVendite implements DAOVendite{
 		else return 0;
 		
 	}
+	
+	public boolean checkVeicoloIsPresente(int numeroTelaio) throws SQLException{
+		String sql = "SELECT * FROM veicolo WHERE numero_telaio = ?";
+		
+		PreparedStatement ps = conn.prepareStatement(sql);
+		
+		ps.setInt(1, numeroTelaio);
+		
+		ResultSet rs = ps.executeQuery();
+		
+		if(rs.next()) return true; //se esiste qualcosa allora esiste il veicolo
+		else return false;
+	}
+	
 }

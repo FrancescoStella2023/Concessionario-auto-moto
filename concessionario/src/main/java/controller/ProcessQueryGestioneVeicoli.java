@@ -24,7 +24,7 @@ public class ProcessQueryGestioneVeicoli {
 				EntitaVeicolo veicolo = new EntitaVeicolo(numTelaioInt, marca, modello, colore, prezzoFloat, tipo, numPorteInt, tipologiaCambio, numAirbagInt, altezzaSeggFloat, idMagazzInt);
 				daoVei.aggiungiVeicolo(veicolo);
 			}
-			else throw new InvalidInputException("Campi vuoti o non validi, riprova., riprova.");//altrimenti lancia l'eccezione
+			else throw new InvalidInputException("Campi vuoti o non validi, riprova.");//altrimenti lancia l'eccezione
 		}
 		catch(SQLException ex) {//gestisce gli errori lanciati dal db
 			switch(ex.getSQLState()) {

@@ -74,4 +74,6 @@ public class DAOGestioneVeicoli implements DAOVeicoli{
 		ps.close();//rilascia la risorsa
 		return res;
 	}
+	
+
 }

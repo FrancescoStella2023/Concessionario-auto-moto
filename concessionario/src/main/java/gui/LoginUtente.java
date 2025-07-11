@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Dimension;
 
 import Principale.*;
 import controller.GestisciLoginAndConnection;
@@ -37,6 +38,8 @@ public class LoginUtente extends JPanel {
 		usernameField = new JTextField();
 		passwordField = new JPasswordField();
 		loginButton = new JButton("Login");
+		Dimension buttonSize = new Dimension(220, 25);
+	    loginButton.setPreferredSize(buttonSize);
 		
 		CellConstraints cc = new CellConstraints();
 		
@@ -70,4 +73,8 @@ public class LoginUtente extends JPanel {
 		return new String(passwordField.getPassword());
 	}
 	
+	public void clear() {
+		usernameField.setText(null);
+		passwordField.setText(null);
+    }
 }

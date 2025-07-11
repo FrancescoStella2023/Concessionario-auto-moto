@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import Principale.*;
 import controller.ProcessQueryGestioneMagazzini;
 import exceptions.InvalidInputException;
@@ -29,25 +30,29 @@ public class GestisciMagazzino extends JPanel {
 		pannelloInserimento = new JPanel();
 
 		FormLayout layout = new FormLayout(
-			"right:pref, 4dlu, 100dlu",
-			"pref, 4dlu, pref, 4dlu, pref"
+			"default:grow, right:pref, 4dlu, 100dlu, default:grow",
+			"50dlu, pref, 4dlu, pref, 4dlu, pref"
 		);
 		pannelloInserimento.setLayout(layout);
 
 		indirizzoField = new JTextField();
 		enterButton = new JButton("Inserisci");
 		backButton = new JButton("Back");
+		
+		Dimension buttonSize = new Dimension(220, 25);
+	    enterButton.setPreferredSize(buttonSize);
 
 		CellConstraints cc = new CellConstraints();
 
-		pannelloInserimento.add(new JLabel("Indirizzo:"), cc.xy(1,1));
-		pannelloInserimento.add(indirizzoField, cc.xy(3,1));
+		pannelloInserimento.add(new JLabel("Indirizzo:"), cc.xy(2,4));
+		pannelloInserimento.add(indirizzoField, cc.xy(4,4));
 
-		pannelloInserimento.add(enterButton, cc.xy(3, 5));
+		pannelloInserimento.add(enterButton, cc.xy(4, 6));
 		enterButton.addActionListener(e -> {
 			try {
 				ProcessQueryGestioneMagazzini.eseguiQueryMagazzino(getIndirizzo());
 				JOptionPane.showMessageDialog(this, "Maggazzino inserito con successo.");
+				mainProcess.showPanel("Mostra funzioni"); //ritorna al menu
 				
 			} catch (InvalidInputException ex) {
 				ex.showErrorDialogPanel(this);
@@ -73,4 +78,8 @@ public class GestisciMagazzino extends JPanel {
 			}
 		};
 	}
+	
+	public void clear() {
+		indirizzoField.setText(null);
+    }
 }
