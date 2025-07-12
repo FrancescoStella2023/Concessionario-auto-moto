@@ -22,6 +22,7 @@ public class GestisciClienti extends JPanel {
     private JTextField indirizzoField;
     private JTextField idClubField;
 	private JButton enterButton;
+	
 	private JButton backButton;
 	
 	private MainProcess mainProcess;
@@ -34,6 +35,7 @@ public class GestisciClienti extends JPanel {
             "right:pref, 4dlu, 150dlu",
             "pref, 4dlu, pref, 4dlu, pref, 4dlu, pref, 4dlu, pref, 4dlu, pref, 4dlu, pref, 4dlu, pref, 4dlu, pref"
         );
+		
 		JTabbedPane tabbedPane = new JTabbedPane();
 		JPanel formPanel = new JPanel(layout);
 		setLayout(new BorderLayout());

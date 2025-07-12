@@ -19,6 +19,7 @@ public class GestisciClub extends JPanel{
 	private JTextField nomeClubField;
 	private JTextField percentualeDiScontoField;
 	private JButton enterButton;
+	
 	private JButton backButton;
 	
 	private MainProcess mainProcess;
@@ -57,7 +58,7 @@ public class GestisciClub extends JPanel{
 		
 		
 		formPanel.add(enterButton, cc.xy(4, 6));
-		enterButton.addActionListener(e ->{
+		enterButton.addActionListener(e ->{//Aggiungi cliente
 			try {
 				ProcessQueryGestioneClub.eseguiQueryClub(getNome(), getPercentualeDiSconto());
 				JOptionPane.showMessageDialog(this, "Club inserito con successo.");
@@ -80,7 +81,7 @@ public class GestisciClub extends JPanel{
 	public String getPercentualeDiSconto() { return percentualeDiScontoField.getText(); }
 	
 	
-	private ActionListener backPressed(){
+	private ActionListener backPressed(){//Ritorna a MostraFunzioni
 		return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -89,7 +90,7 @@ public class GestisciClub extends JPanel{
         };
 	}
 	
-	public void clear() {
+	public void clear() {//Ripulisci diversi field
         nomeClubField.setText(null);
 		percentualeDiScontoField.setText(null);
     }

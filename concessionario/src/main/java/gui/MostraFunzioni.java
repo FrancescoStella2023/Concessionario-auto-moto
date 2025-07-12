@@ -37,8 +37,6 @@ public class MostraFunzioni extends JPanel {
 		setLayout(layout);
 		CellConstraints cc = new CellConstraints();
 		
-		//Da implementare un if check per is admin che rende visibili solo i bottoni a cui l'utente ha accesso
-		
 		//Utente
 		gestisciClientiButton = new JButton("Gestisci Clienti");
 	    gestisciVeicoliButton = new JButton("Gestisci Veicoli");
@@ -80,7 +78,7 @@ public class MostraFunzioni extends JPanel {
 	}
 	
 	
-	public void AggiornaBottoni() {
+	public void AggiornaBottoni() {//Mostra bottoni in base a privileggio admin
 		if (InfoDipendenteLogic.getPrivilege()) {
 			CellConstraints cc = new CellConstraints();
 			add(gestisciMagazzinoButton, cc.xy(2, 11));
@@ -92,7 +90,7 @@ public class MostraFunzioni extends JPanel {
 	}
 	
 		
-	private ActionListener buttonPressed(int numScheda) {//Usa uno switch per aprire le schede corrette
+	private ActionListener buttonPressed(int numScheda) {//Usa uno switch per aprire la schede selezionata
 		 return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

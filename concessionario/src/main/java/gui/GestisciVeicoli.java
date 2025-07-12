@@ -15,8 +15,11 @@ import exceptions.InvalidInputException;
 
 public class GestisciVeicoli extends JPanel{
 	
+	private JTabbedPane tabbedPane;
+	
+    //Campi add
+    private JPanel pannelloAdd;
 	private JTextField numeroTelaioAdd;
-    private JTextField numeroTelaioRemove;
     private JTextField marca;
     private JTextField modello;
     private JTextField colore;
@@ -28,23 +31,19 @@ public class GestisciVeicoli extends JPanel{
     private JTextField altezzaSeggiolino;
     private JTextField idMagazzino;
     private JButton addButton;
-    
-    
-
-    private JPanel pannelloAdd;
-    private JPanel pannelloRemove;
-    private JTabbedPane tabbedPane;
-
     private JRadioButton autoRadio;
     private JRadioButton motoRadio;
     private ButtonGroup tipoGruppo;
-    
     private JRadioButton automaticoRadio;
     private JRadioButton manualeRadio;
     private ButtonGroup tipologiaCambioGruppo;
     
     
+    //Campi remove
+    private JPanel pannelloRemove;
+    private JTextField numeroTelaioRemove;
     private JButton removeButton;
+    
     private JButton backButton;
     
     private MainProcess mainProcess;
@@ -58,6 +57,7 @@ public class GestisciVeicoli extends JPanel{
         
         backButton = new JButton("Back");
         
+        //Diviso in diverse funzioni per tenere ordinato
         creaPannelloAdd();
         creaPannelloRemove();
         
@@ -68,7 +68,7 @@ public class GestisciVeicoli extends JPanel{
         add(tabbedPane, BorderLayout.CENTER);
         add(backButton, BorderLayout.SOUTH);
         
-        addButton.addActionListener(e -> {
+        addButton.addActionListener(e -> {//Aggiungi veicolo
         	try {
 				ProcessQueryGestioneVeicoli.eseguiQueryNewVeicolo(getNumeroTelaio(), getMarca(), getModello(), getColore(), getPrezzo(), getTipo(), getNumeroPorte(), getTipologiaCambio(), getNumeroAirbag(), getAltezzaSeggiolino(), getIdMagazzino());
 				JOptionPane.showMessageDialog(this, "Veicolo inserito con successo.");
@@ -98,7 +98,7 @@ public class GestisciVeicoli extends JPanel{
         numeroPorte = new JTextField();
         
         tipologiaCambio = new JTextField();
-    	tipologiaCambio.setVisible(false); // campo nascosto
+    	tipologiaCambio.setVisible(false); //Campo nascosto
     	automaticoRadio = new JRadioButton("Automatico");
     	manualeRadio = new JRadioButton("Manuale");
     	tipologiaCambioGruppo = new ButtonGroup();
@@ -108,7 +108,7 @@ public class GestisciVeicoli extends JPanel{
     	automaticoRadio.addActionListener(e -> tipologiaCambio.setText("a"));
     	manualeRadio.addActionListener(e -> tipologiaCambio.setText("m"));
     	
-    	//imposta manuale come predefinito
+    	//Imposta manuale come predefinito
     	manualeRadio.setSelected(true);
     	tipologiaCambio.setText("m");
     	
@@ -131,7 +131,7 @@ public class GestisciVeicoli extends JPanel{
         autoRadio.setSelected(true);
         aggiornaCampiTipo("a");
         
-        // Listeners per cambiare visibilità campi
+        //Listeners per cambiare visibilità campi
         autoRadio.addActionListener(e -> aggiornaCampiTipo("a"));
         motoRadio.addActionListener(e -> aggiornaCampiTipo("m"));
         
@@ -180,7 +180,6 @@ public class GestisciVeicoli extends JPanel{
         pannelloAdd.add(tipoField, cc.xy(1, 1));
     }
     
-    
     private void creaPannelloRemove() {
     	pannelloRemove = new JPanel(new FormLayout(
             "right:pref, 4dlu, 150dlu", 
@@ -209,8 +208,7 @@ public class GestisciVeicoli extends JPanel{
         });
     }
     
-    
-    private void aggiornaCampiTipo(String tipo) { //per settare da soli i campi a 0 in caso sia auto o moto
+    private void aggiornaCampiTipo(String tipo) { //Per settare da soli i campi a 0 in caso sia auto o moto
 		tipoField.setText(tipo);
 		boolean isAuto = tipo.equals("a");//Vero se è un auto
 		
@@ -228,7 +226,7 @@ public class GestisciVeicoli extends JPanel{
 	}
     
 
-    // Getters per prendere i dati dai field
+    //Getters per prendere i dati dai field
     public String getNumeroTelaio() { return numeroTelaioAdd.getText(); }
     public String getMarca() { return marca.getText(); }
     public String getModello() { return modello.getText(); }
@@ -242,7 +240,7 @@ public class GestisciVeicoli extends JPanel{
     public String getIdMagazzino() { return idMagazzino.getText(); }
     public String getNumeroTelaioRemove() { return numeroTelaioRemove.getText(); }
     
-    private ActionListener backPressed(){
+    private ActionListener backPressed(){//Ritorna a MostraFunzioni
 		return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -251,7 +249,7 @@ public class GestisciVeicoli extends JPanel{
         };
 	}
 	
-	public void clear() {
+	public void clear() {//Ripulisci diversi field
 		numeroTelaioAdd.setText(null);
     	numeroTelaioRemove.setText(null);
     	marca.setText(null);

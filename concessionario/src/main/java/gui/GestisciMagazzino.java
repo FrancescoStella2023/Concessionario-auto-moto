@@ -14,12 +14,13 @@ import exceptions.InvalidInputException;
 
 public class GestisciMagazzino extends JPanel {
 
-	private JTextField indirizzoField;
-	private JButton enterButton;
-	private JButton backButton;
-
 	private JTabbedPane tabbedPane;
 	private JPanel pannelloInserimento;
+	
+	private JTextField indirizzoField;
+	private JButton enterButton;
+	
+	private JButton backButton;
 
 	MainProcess mainProcess;
 
@@ -52,7 +53,7 @@ public class GestisciMagazzino extends JPanel {
 			try {
 				ProcessQueryGestioneMagazzini.eseguiQueryMagazzino(getIndirizzo());
 				JOptionPane.showMessageDialog(this, "Maggazzino inserito con successo.");
-				mainProcess.showPanel("Mostra funzioni"); //ritorna al menu
+				mainProcess.showPanel("Mostra funzioni"); //Ritorna al menu
 				
 			} catch (InvalidInputException ex) {
 				ex.showErrorDialogPanel(this);
@@ -70,7 +71,7 @@ public class GestisciMagazzino extends JPanel {
 	
 	public String getIndirizzo() { return indirizzoField.getText(); }
 
-	private ActionListener backPressed(){
+	private ActionListener backPressed(){//Ritorna a MostraFunzioni
 		return new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -79,7 +80,7 @@ public class GestisciMagazzino extends JPanel {
 		};
 	}
 	
-	public void clear() {
+	public void clear() {//Ripulisci diversi field
 		indirizzoField.setText(null);
     }
 }

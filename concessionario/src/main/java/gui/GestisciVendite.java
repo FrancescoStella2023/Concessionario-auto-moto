@@ -18,10 +18,9 @@ public class GestisciVendite extends JPanel {
     private JButton backButton;
     private JTabbedPane tabbedPane;
     
-    private JPanel pannelloVendita;
-    private JPanel pannelloRestituzione;
     
     // Campi vendita
+    private JPanel pannelloVendita;
     private JFormattedTextField dataVenditaField;
     private JLabel prezzoFinaleLabel;
     private JButton calcolaPrezzoFinaleButton;
@@ -30,6 +29,7 @@ public class GestisciVendite extends JPanel {
     private JButton venditaButton;
     
     // Campi restituzione
+    private JPanel pannelloRestituzione;
     private JFormattedTextField dataRestituzioneField;
     private JTextField idVenditaRestField;
     private JButton restituzioneButton;
@@ -40,16 +40,17 @@ public class GestisciVendite extends JPanel {
     	
         this.mainProcess = main;
         
-        
         tabbedPane = new JTabbedPane();
         
+        backButton = new JButton("Back");
+        
+        //Diviso in diverse funzioni per tenere ordinato
         creaPannelloVendita();
         creaPannelloRestituzione();
         
         tabbedPane.addTab("Nuova Vendita", pannelloVendita);
         tabbedPane.addTab("Restituzione", pannelloRestituzione);
         
-        backButton = new JButton("Back");
         
         setLayout(new BorderLayout());
         add(tabbedPane, BorderLayout.CENTER);
@@ -65,7 +66,9 @@ public class GestisciVendite extends JPanel {
             "right:pref, 4dlu, 150dlu, 10dlu, pref",
             "pref, 4dlu, pref, 4dlu, pref, 4dlu, pref, 4dlu, pref, 4dlu, pref"
         );
+        
         pannelloVendita.setLayout(layout);
+        
         CellConstraints cc = new CellConstraints();
         
         dataVenditaField = new JFormattedTextField();
@@ -75,12 +78,11 @@ public class GestisciVendite extends JPanel {
         numeroTelaioField = new JTextField();
         venditaButton = new JButton("Inserisci vendita");
         
-     // Placeholder con data odierna
+        // Placeholder con data odierna
         String dataCorrente = LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE);
         dataVenditaField.setText(dataCorrente);
         dataVenditaField.setForeground(Color.GRAY);
 
-        // Comportamento placeholder
         dataVenditaField.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {
@@ -98,6 +100,7 @@ public class GestisciVendite extends JPanel {
                 }
             }
         });
+        
         pannelloVendita.add(new JLabel("Data Vendita (YYYY-MM-DD):"), cc.xy(1,1));
         pannelloVendita.add(dataVenditaField, cc.xy(3,1));
         
@@ -107,16 +110,13 @@ public class GestisciVendite extends JPanel {
         pannelloVendita.add(new JLabel("Numero Telaio (solo cifre):"), cc.xy(1,5));
         pannelloVendita.add(numeroTelaioField, cc.xy(3,5));
         
-        //Dimension buttonSize = new Dimension(225, 50);
-        //alcolaPrezzoFinaleButton.setPreferredSize(buttonSize);
         pannelloVendita.add(calcolaPrezzoFinaleButton, cc.xy(3,7));
         pannelloVendita.add(new JLabel("Visualizza prezzo finale:"), cc.xy(1,9));
         pannelloVendita.add(prezzoFinaleLabel, cc.xy(3,9));
         
-        
         pannelloVendita.add(venditaButton, cc.xy(3,11));
         
-        calcolaPrezzoFinaleButton.addActionListener(e -> {
+        calcolaPrezzoFinaleButton.addActionListener(e -> {//Esegui calcolo prezzo finale
            try {
 			prezzoFinaleLabel.setText("€ " + Float.toString(ProcessQueryGestioneVendite.calcolaPrezzoFinale(getNumeroTelaio(), getIdCliente())));
            } 
@@ -125,7 +125,7 @@ public class GestisciVendite extends JPanel {
            } 
         });
         
-        venditaButton.addActionListener(e -> {
+        venditaButton.addActionListener(e -> {//Aggiungi vendita
             try {
             	ProcessQueryGestioneVendite.eseguiQueryVendita(getDataVendita(), getNumeroTelaio(), getIdCliente());
             	JOptionPane.showMessageDialog(this, "Vendita inserita con successo.");
@@ -136,28 +136,6 @@ public class GestisciVendite extends JPanel {
             }
         });
     }
-    
-    private Date getDataVendita() throws InvalidInputException {
-	    try {
-	        LocalDate data = LocalDate.parse(dataVenditaField.getText(), DateTimeFormatter.ISO_LOCAL_DATE);
-	        return Date.valueOf(data);
-	    } catch (DateTimeParseException e) {
-	        throw new InvalidInputException("Formato data vendita non valido. Usa YYYY-MM-DD.");
-	    }
-	}
-	private String getIdCliente() { return idClienteEsistenteField.getText(); }
-	private String getNumeroTelaio() { return numeroTelaioField.getText(); }
-	
-	private Date getDataRest() throws InvalidInputException {
-	    try {
-	        LocalDate data = LocalDate.parse(dataRestituzioneField.getText(), DateTimeFormatter.ISO_LOCAL_DATE);
-	        return Date.valueOf(data);
-	    } catch (DateTimeParseException e) {
-	        throw new InvalidInputException("Formato data restituzione non valido. Usa YYYY-MM-DD.");
-	    }
-	}
-
-	private String getIdVenditaRest() { return idVenditaRestField.getText(); }
     
     private void creaPannelloRestituzione() {
         pannelloRestituzione = new JPanel();
@@ -195,7 +173,29 @@ public class GestisciVendite extends JPanel {
         });
     }
     
-	private ActionListener backPressed(){
+    private Date getDataVendita() throws InvalidInputException {
+	    try {
+	        LocalDate data = LocalDate.parse(dataVenditaField.getText(), DateTimeFormatter.ISO_LOCAL_DATE);
+	        return Date.valueOf(data);
+	    } catch (DateTimeParseException e) {
+	        throw new InvalidInputException("Formato data vendita non valido. Usa YYYY-MM-DD.");
+	    }
+	}
+	
+	private Date getDataRest() throws InvalidInputException {
+	    try {
+	        LocalDate data = LocalDate.parse(dataRestituzioneField.getText(), DateTimeFormatter.ISO_LOCAL_DATE);
+	        return Date.valueOf(data);
+	    } catch (DateTimeParseException e) {
+	        throw new InvalidInputException("Formato data restituzione non valido. Usa YYYY-MM-DD.");
+	    }
+	}
+
+	private String getIdVenditaRest() { return idVenditaRestField.getText(); }
+	private String getIdCliente() { return idClienteEsistenteField.getText(); }
+	private String getNumeroTelaio() { return numeroTelaioField.getText(); }
+    
+	private ActionListener backPressed(){//Ritorna a MostraFunzioni
 		return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -204,7 +204,7 @@ public class GestisciVendite extends JPanel {
         };
 	}
 	
-	public void clear() {
+	public void clear() {//Ripulisci diversi field
     	dataVenditaField.setText(null);
     	prezzoFinaleLabel.setText(null);
     	idClienteEsistenteField.setText(null);

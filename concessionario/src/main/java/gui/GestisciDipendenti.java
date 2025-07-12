@@ -16,32 +16,32 @@ import controller.ProcessQueryGestioneDipendenti;
 import controller.ProcessQueryMostraDati;
 import exceptions.InvalidInputException;
 
-//------------Temporaneo, da riorganizzare/riscrivere
 
 public class GestisciDipendenti extends JPanel{
 	
+	private JTabbedPane tabbedPane;
+	
+    //Campi new password
+    private JPanel pannelloNewPass;
 	private JTextField idDipendenteNewPassField;
 	private JTextField newPasswordField;
+	
+	//Campi add
+	private JPanel pannelloAdd;
     private JTextField nomeField;
     private JTextField cognomeField;
     private JTextField passwordField;
     private JTextField isAdminField;
-    
-    private JButton backButton;
-    
     private JRadioButton trueRadio;
     private JRadioButton falseRadio;
     private ButtonGroup tipoGruppo;
-
-    private ArrayList<String> listaDipendenti;
-
-    private JPanel pannelloAdd;
-    private JPanel pannelloNewPass;
-    private JPanel pannelloViewDipendenti;
     
+    //Campi view
+    private JPanel pannelloViewDipendenti;
+    private ArrayList<String> listaDipendenti;
     private ArrayList<String[]> datiDipendenti;
-
-    private JTabbedPane tabbedPane;
+    
+    private JButton backButton;
     
     private MainProcess mainProcess;
     
@@ -75,8 +75,8 @@ public class GestisciDipendenti extends JPanel{
 		try {
 			datiDipendenti = new ArrayList<>();
 			ArrayList<String[]> dataDip = ProcessQueryMostraDati.eseguiQueryView("dipendenti");
-			datiDipendenti.add(dataDip.get(0)); //intestazioni colonne
-			datiDipendenti.add(dataDip.get(1)); //dati effettivi
+			datiDipendenti.add(dataDip.get(0)); //Intestazioni colonne
+			datiDipendenti.add(dataDip.get(1)); //Dati effettivi
 			
 		} catch (SQLException e) {
 			
@@ -102,13 +102,13 @@ public class GestisciDipendenti extends JPanel{
 	    int colonne = intestazioni.length;
 	    int righe = valori.length / colonne;
 	
-	    int posColonnaPassword = 0; //salva il numero della colonna delle password per non non farle vedere
+	    int posColonnaPassword = 0; //Aalva il numero della colonna delle password per non non farle vedere
 	    
-	    // Container verticale che contiene le righe
+	    //Container verticale che contiene le righe
 	    JPanel contenitore = new JPanel();
 	    contenitore.setLayout(new BoxLayout(contenitore, BoxLayout.Y_AXIS));
 	
-	    // Riga intestazioni (Colore più marcato per differenziarle)
+	    //Riga intestazioni (Colore più marcato per differenziarle)
 	    JPanel headerRow = new JPanel(new GridLayout(1, colonne));
 	    for (String intestazione : intestazioni) {
 	        if(!intestazione.equals("password")) {
@@ -116,13 +116,13 @@ public class GestisciDipendenti extends JPanel{
 		        label.setFont(label.getFont().deriveFont(java.awt.Font.BOLD, 11f));//Rimpicciolisci font
 		        label.setBorder(BorderFactory.createLineBorder(java.awt.Color.BLACK));
 		        headerRow.add(label);
-		        posColonnaPassword++; //incrementa la posizione della colonna password
+		        posColonnaPassword++; //Incrementa la posizione della colonna password
 	        }
 	        
 	    }
 	    contenitore.add(headerRow);
 	
-	    // Righe dati
+	    //Righe dati
 	    for (int i = 0; i < righe; i++) {
 	        JPanel dataRow = new JPanel(new GridLayout(1, colonne));
 	        for (int j = 0; j < colonne; j++) {
@@ -151,7 +151,7 @@ public class GestisciDipendenti extends JPanel{
     	cognomeField = new JTextField();
     	passwordField = new JTextField();
     	isAdminField = new JTextField();
-    	isAdminField.setVisible(false); // campo nascosto
+    	isAdminField.setVisible(false); //Campo nascosto
 
     	trueRadio = new JRadioButton("true");
     	falseRadio = new JRadioButton("false");
@@ -173,21 +173,21 @@ public class GestisciDipendenti extends JPanel{
     	pannelloAdd.add(passwordField);
     	pannelloAdd.add(new JLabel("È Admin:"));
 
-    	// Pannello per i radio
+    	//Pannello per i radio
     	JPanel radioPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
     	radioPanel.add(trueRadio);
     	radioPanel.add(falseRadio);
-    	falseRadio.setSelected(true); //di base è false
+    	falseRadio.setSelected(true); //Di base è false
     	pannelloAdd.add(radioPanel);
 
-    	pannelloAdd.add(isAdminField); // campo invisibile
+    	pannelloAdd.add(isAdminField); //Campo invisibile
 
     	JButton aggiungiButton = new JButton("Aggiungi");
     	aggiungiButton.addActionListener(e -> {
     	    try {
     	        ProcessQueryGestioneDipendenti.eseguiQueryNewDipendente(getNome(), getCognome(), getPassword(), getIsAdmin());
     	        JOptionPane.showMessageDialog(this, "Dipendente aggiunto.");
-    	        populateData(); //aggiorna la view
+    	        populateData(); //Aggiorna la view
     	        clear();
     	    } catch (InvalidInputException ex) {
     	        ex.showErrorDialogPanel(this);
@@ -259,7 +259,7 @@ public class GestisciDipendenti extends JPanel{
         pannelloViewDipendenti.repaint();
     }
     
-    private ActionListener backPressed(){
+    private ActionListener backPressed(){//Ritorna a MostraFunzioni
 		return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -268,7 +268,7 @@ public class GestisciDipendenti extends JPanel{
         };
 	}
 	
-	public void clear() {
+	public void clear() {//Ripulisci diversi field
 		idDipendenteNewPassField.setText(null);
 		newPasswordField.setText(null);
     	nomeField.setText(null);

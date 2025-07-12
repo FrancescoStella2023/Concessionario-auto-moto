@@ -26,7 +26,6 @@ public class LoginUtente extends JPanel {
 		
 		this.mainProcess = main;
 		
-		
 		FormLayout layout = new FormLayout(
 			"right:pref, 4dlu, 150dlu",
 			"75dlu, pref, 4dlu, pref, 4dlu, pref"
@@ -73,7 +72,7 @@ public class LoginUtente extends JPanel {
 		return new String(passwordField.getPassword());
 	}
 	
-	public void clear() {
+	public void clear() {//Ripulisci diversi field
 		usernameField.setText(null);
 		passwordField.setText(null);
     }

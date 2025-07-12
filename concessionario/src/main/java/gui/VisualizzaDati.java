@@ -72,7 +72,8 @@ public class VisualizzaDati extends JPanel{
     }
     
     
-    //Funzione helper per semplificare leggibilita codice, crea una porzione nel panel per poter abilitare la barra dell'overflow
+    /*Funzione helper per semplificare leggibilita codice, crea una porzione 
+     * nel panel per poter abilitare la barra dell'overflow*/
     private JScrollPane creaScrollPanePerPanel(JPanel panel) {
         JScrollPane scrollPane = new JScrollPane(panel,
             JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
@@ -86,8 +87,8 @@ public class VisualizzaDati extends JPanel{
 		try {
 			datiVeicoli = new ArrayList<>();
 			ArrayList<String[]> dataVeic = ProcessQueryMostraDati.eseguiQueryView("veicolo");
-			datiVeicoli.add(dataVeic.get(0)); //intestazioni colonne
-			datiVeicoli.add(dataVeic.get(1)); //dati effettivi
+			datiVeicoli.add(dataVeic.get(0)); //Intestazioni colonne
+			datiVeicoli.add(dataVeic.get(1)); //Dati effettivi
 			
 			datiClienti = new ArrayList<>();
 			ArrayList<String[]> dataCli = ProcessQueryMostraDati.eseguiQueryView("clienti");
@@ -180,7 +181,7 @@ public class VisualizzaDati extends JPanel{
         panel.repaint();
     }
     
-	private ActionListener backPressed(){
+	private ActionListener backPressed(){//Ritorna a MostraFunzioni
 		return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

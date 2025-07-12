@@ -50,7 +50,7 @@ public class MainProcess {
 		venditePanel = new GestisciVendite(this);
 		datiPanel = new VisualizzaDati(this);
 		
-		//aggiunge tutti i card panel
+		//Aggiunge tutti i card panel
 		cardPanel.add(loginPanel, "Login");
 		cardPanel.add(funzioniPanel, "Mostra funzioni");
 		cardPanel.add(clientiPanel, "Gestisci clienti");
@@ -62,7 +62,8 @@ public class MainProcess {
 		cardPanel.add(datiPanel, "Visualizza dati");
 		
 		
-		JPanel wrapper = new JPanel(new GridBagLayout());//Wrapper per centrare la gui
+		//Wrapper per centrare la gui
+		JPanel wrapper = new JPanel(new GridBagLayout());
 		wrapper.add(cardPanel);
 		
 		frame.setContentPane(wrapper);
@@ -70,7 +71,7 @@ public class MainProcess {
 		
 	}
 	
-	public void showPanel(String name) {//Funzione che permette di cambiare scheda
+	public void showPanel(String name) {//Funzione che permette di cambiare scheda e ripulisce i diversi field
 		cardLayout.show(cardPanel, name);
 		clientiPanel.clear();
 		clubPanel.clear();
@@ -85,20 +86,20 @@ public class MainProcess {
 		return funzioniPanel;
 	}
    
-	public JFrame getFrame() { //ritorna il frame, usato per cambiare il nome dinamicamente alla finestra
+	public JFrame getFrame() { //Ritorna il frame, usato per cambiare il nome dinamicamente alla finestra
 		return frame;
 	}
 	
-	public static void main(String args[]) {//Fa partire il programma
+	public static void main(String args[]) {
 		
-		try{ //avvia la connessione al database
+		try{ //Avvia la connessione al database
 			GestisciLoginAndConnection.startConnection("postgres", "20052206");
 		}
 		catch(SQLException ex) {
 			ex.printStackTrace();
 		}
 		
-		SwingUtilities.invokeLater(() -> new MainProcess()); //garantisce che la gui venga inizializzata nel thread corretto
+		SwingUtilities.invokeLater(() -> new MainProcess()); //Garantisce che la gui venga inizializzata nel thread corretto
 		
 	}
 	
